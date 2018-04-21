@@ -6,7 +6,9 @@
           <mu-card-header title="项目总数" subTitle="PROJECT">
             <mu-avatar icon="account_balance" backgroundColor="red500" slot="avatar" />
           </mu-card-header>
-          <div class="total-number">320</div>
+          <div class="total-number">
+            <Countup :start-val="0" :end-val="300" :duration="300/150" />
+          </div>
         </mu-card>
       </mu-col>
       <mu-col width="100" tablet="50" desktop="25">
@@ -14,7 +16,9 @@
           <mu-card-header title="房源总数" subTitle="RESOURCE">
             <mu-avatar icon="store" backgroundColor="blue500" slot="avatar" />
           </mu-card-header>
-          <div class="total-number">157</div>
+          <div class="total-number">
+            <Countup :start-val="0" :end-val="157" :duration="157/100" />
+          </div>
         </mu-card>
       </mu-col>
       <mu-col width="100" tablet="50" desktop="25">
@@ -22,7 +26,9 @@
           <mu-card-header title="空置房源" subTitle="EMPTY">
             <mu-avatar icon="people_outline" backgroundColor="green500" slot="avatar" />
           </mu-card-header>
-          <div class="total-number">33</div>
+          <div class="total-number">
+            <Countup :start-val="0" :end-val="33" :duration="33/100" />
+          </div>
         </mu-card>
       </mu-col>
       <mu-col width="100" tablet="50" desktop="25">
@@ -30,7 +36,9 @@
           <mu-card-header title="住户总数" subTitle="TENEMENT">
             <mu-avatar icon="supervisor_account" backgroundColor="amber500" slot="avatar" />
           </mu-card-header>
-          <div class="total-number">78</div>
+          <div class="total-number">
+            <Countup :start-val="0" :end-val="78" :duration="70/100" />
+          </div>
         </mu-card>
       </mu-col>
     </mu-row>
@@ -99,7 +107,11 @@
   </div>
 </template>
 <script>
+import Countup from '@/components/basic/countup.vue'
 export default {
+  components: {
+    Countup
+  },
   data() {
     return {
       name: 'home',
