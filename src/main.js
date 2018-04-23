@@ -14,6 +14,16 @@ import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
 Vue.use(MuseUI)
 
+// ripple
+import VueTouchRipple from 'vue-touch-ripple'
+import 'vue-touch-ripple/dist/vue-touch-ripple.css'
+Vue.use(VueTouchRipple, {
+  color: '#000',
+  opacity: 0.1,
+  speed: 1,
+  transition: 'ease'
+})
+
 // vue-cookie
 import VueCookie from 'vue-cookie'
 Vue.use(VueCookie)

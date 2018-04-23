@@ -4,7 +4,7 @@
       <div class="main-slogan">公租房管理系统</div>
       <div class="main-nav">
         <mu-tabs :value="activeTab" @change="handleTabChange" lineClass="line-class">
-          <mu-tab v-for="nav in navList" :value="nav.routeName">
+          <mu-tab v-for="nav in navList" :key="nav.routeName" :value="nav.routeName">
             <mu-icon class="main-nav-icon" :value="nav.icon" />{{nav.name}}</mu-tab>
         </mu-tabs>
       </div>
