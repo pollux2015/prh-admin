@@ -15,11 +15,7 @@
         <mu-menu-item title="个人设置" />
       </mu-icon-menu>
     </mu-appbar>
-    <div class="main-tabs">
-      <Tabs />
-    </div>
-    <!-- :style="contentStyle" -->
-    <div class="main-wrapper">
+    <div class="main-wrapper" :style="contentStyle">
       <router-view/>
     </div>
     <div class="main-footer">
@@ -50,7 +46,7 @@ export default {
   methods: {
     setContentStyle() {
       const clientH = document.documentElement.clientHeight
-      this.contentStyle = { height: `${clientH - 64 - 54 - 30}px` }
+      this.contentStyle = { 'min-height': `${clientH - 64 - 30}px` }
     },
     handleActive() {},
     getContetSize() {
@@ -58,7 +54,6 @@ export default {
       return clientH - 64 - 54 - 30
     },
     handleTabChange(val) {
-      console.log(val)
       this.activeTab = val
       this.$router.push({
         name: val
@@ -100,10 +95,6 @@ export default {
   top: 6px;
   margin-right: 5px;
   font-size: 22px;
-}
-
-.main-tabs {
-  padding: 10px;
 }
 
 .main-wrapper {

@@ -5,11 +5,7 @@
 </template>
 
 <script>
-import Layout from '@/components/basic/layout'
 export default {
-  components: {
-    Layout
-  },
   name: 'App'
 }
 </script>
@@ -22,6 +18,9 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+.gap-r-l{
+  padding: 0 16px;
 }
 
 #app .color-red{

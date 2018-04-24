@@ -1,11 +1,15 @@
 <template>
   <div class="page">
-    {{name}}
+    <Map />
   </div>
 </template>
 
 <script>
+import Map from './map.vue'
 export default {
+	components: {
+		Map
+	},
   data () {
     return {
       name: 'resource.map',

@@ -1,53 +1,52 @@
 <template>
-  <div class="tabs">
-    <span v-for="tab in tabs">
-      <mu-chip @delete="handleClose(tab)" :showDelete="!tab.disabled"> {{tab.text}} </mu-chip>
-    </span>
+  <div>
+    <scroll class="wrapper" :scroll-x="true" :scroll-y="false" :list="data"></scroll>
   </div>
 </template>
 <script>
+import scroll from '@/components/basic/scroll'
+import lodash from 'lodash'
 export default {
+  components: {
+    scroll
+  },
   data() {
     return {
-      tabs: [{
-        name: 'home',
-        text: '首页',
-        disabled: false,
-        query: {},
-        params: {}
-      }],
-      msg: 'Welcome to Your Vue.js App'
+      data: [],
+      pulldown: true
     }
   },
+  created() {
+    this.loadData()
+  },
   methods: {
-    handleClose() {},
-    mouseenter(tab, state) {
-      tab.showDelete = state
-      console.log(123)
-    },
+    loadData() {
+      setTimeout(() => {
+        this.data = []
+        for (var i = 0; i < 20; i++) {
+          this.data.push({
+            name: 'TestScoller_' + i,
+            tabname: '首页'
+          })
+        }
+      }, 100)
+
+    }
   }
 }
 
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1,
-h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
+<style type="text/css">
+.content {
   padding: 0;
+  margin: 0;
+  height: 20px;
 }
 
-li {
+.tab-item {
+  float: left;
   display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
+  padding: 0 20px;
 }
 
 </style>
