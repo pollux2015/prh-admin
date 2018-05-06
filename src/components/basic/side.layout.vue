@@ -11,11 +11,11 @@
             <mu-text-field hintText="请输入房源" fullWidth style="margin: 0" />
           </div>
           <mu-list>
-            <mu-list-item :title="areaItem.name" :key="areaItem.id" v-for="areaItem in sourceList">
+            <mu-list-item :title="areaItem.name" :key="areaItem.id" v-for="areaItem in sourceList" @click="sideclick(areaItem)">
               <mu-icon slot="left" value="explore" />
-              <mu-list-item slot="nested" :title="houseItem.name" toggleNested :key="houseItem.id" v-for="houseItem in areaItem.children">
+              <mu-list-item slot="nested" :title="houseItem.name" toggleNested :key="houseItem.id" v-for="houseItem in areaItem.children" @click="sideclick(houseItem)">
                 <mu-icon slot="left" value="store" />
-                <mu-list-item :title="floorItem.name" slot="nested" :key="floorItem.id" v-for="floorItem in houseItem.children">
+                <mu-list-item :title="floorItem.name" slot="nested" :key="floorItem.id" v-for="floorItem in houseItem.children" @click="sideclick(floorItem)">
                   <mu-icon slot="left" value="domain" />
                 </mu-list-item>
               </mu-list-item>
@@ -25,7 +25,6 @@
       </mu-col>
       <mu-col width="100" tablet="60" desktop="80">
         <mu-card>
-          <Tabs />
           <mu-content-block>
             <router-view/>
           </mu-content-block>
@@ -35,11 +34,8 @@
   </mu-content-block>
 </template>
 <script>
-import Tabs from '@/components/basic/tabs'
+
 export default {
-  components: {
-    Tabs
-  },
   data() {
     return {
       sourceList: [{
@@ -49,7 +45,7 @@ export default {
         children: [{
           id: 0,
           name: 'A花园',
-          type: 'house',
+          type: 'project',
           children: [{
             id: 0,
             name: '1栋',
@@ -66,7 +62,7 @@ export default {
         }, {
           id: 1,
           name: 'B花园',
-          type: 'house',
+          type: 'project',
           children: [{
             id: 0,
             name: '1栋',
@@ -82,6 +78,23 @@ export default {
           }]
         }]
       }]
+    }
+  },
+  methods: {
+    sideclick(activeItem){
+      // 当前菜单主路由名称, 根据主菜单跳转到不同路由
+      const routeName = this.$route.name.split('.')[0]
+      const ActiveType = activeItem.type
+      if(routeName == 'house_resource'){ // 房源管理
+        this.$router.push({
+          name: ActiveType == 'area' ? 'house_resource.project.map' : `house_resource.${ActiveType}.edit`,
+          params: {
+            id: activeItem.id
+          }
+        })
+      }else if(routeName == 'tenement'){ // 住户管理
+
+      }
     }
   }
 }

@@ -2,7 +2,7 @@
   <div class="page">
     <baidu-map class="bm-view" :center="center" :zoom="zoom" :ak="ak" @ready="handler" :double-click-zoom="false">
       <BmNavigation />
-      <BmOverlay v-for="mark in marks" :position="mark" @click="clickMark(mark)" :text="mark.name">
+      <BmOverlay v-for="mark in marks" :key="mark.name" :position="mark" @click="clickMark(mark)" :text="mark.name">
       </BmOverlay>
     </baidu-map>
   </div>
