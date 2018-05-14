@@ -1,9 +1,9 @@
 <template>
   <form class="form-wrapper">
     <div class="form-top-funs">
-      <Tooltip label="保存项目" icon="check_circle" :size="32">
+      <Tooltip label="保存项目" @click="formSave" icon="check_circle" :size="32">
       </Tooltip>
-      <Tooltip label="关闭" icon="cancel" :size="32" color="red" @click="$store.commit('REMOVE_TAB_CURRENT')">
+      <Tooltip label="删除项目" @click="formDelete" icon="cancel" :size="32" color="red">
       </Tooltip>
     </div>
     <mu-row>
@@ -42,7 +42,8 @@
           <mu-text-field label="项目地址" hintText="输入项目详细地址" fullWidth labelFloat/>
           <Map />
           <div class="form-footer">
-            <mu-raised-button label="保存项目" icon="check_circle" backgroundColor="blue" />
+            <mu-raised-button label="保存项目" @click="formSave" icon="check_circle" backgroundColor="blue" />
+            <mu-raised-button label="删除项目" @click="formDelete" icon="cancel" backgroundColor="red" />
           </div>
         </div>
       </mu-col>
@@ -67,7 +68,14 @@ export default {
     }
   },
   methods: {
-    
+    formSave(){
+      console.log('save')
+      this.$store.commit('REMOVE_TAB_CURRENT')
+    },
+    formDelete(){
+      console.log('delete')
+      this.$store.commit('REMOVE_TAB_CURRENT')
+    }
   }
 }
 
