@@ -1,9 +1,9 @@
 <template>
   <form class="form-wrapper">
     <div class="form-top-funs">
-      <Tooltip label="保存楼栋" @click="formSave" icon="check_circle" :size="32">
+      <Tooltip label="保存" @click="formSave" icon="check_circle" :size="32">
       </Tooltip>
-      <Tooltip label="删除楼栋" @click="formDelete" icon="cancel" :size="32" color="red">
+      <Tooltip label="删除" @click="formDelete" icon="cancel" :size="32" color="red">
       </Tooltip>
     </div>
     <mu-row>
@@ -43,8 +43,8 @@
           <br>
           <mu-text-field label="楼栋层数" hintText="楼栋层数仅能输入数字" labelFloat />
           <div class="form-footer">
-            <mu-raised-button label="保存楼栋" @click="formSave" icon="check_circle" backgroundColor="blue" />
-            <mu-raised-button label="删除楼栋" @click="formDelete" icon="cancel" backgroundColor="red" />
+            <mu-raised-button label="保存" @click="formSave" icon="check_circle" backgroundColor="blue" />
+            <mu-raised-button label="删除" @click="formDelete" icon="cancel" backgroundColor="red" />
           </div>
         </div>
       </mu-col>
@@ -52,11 +52,7 @@
   </form>
 </template>
 <script>
-import Map from '@/components/basic/map'
 export default {
-  components: {
-    Map
-  },
   data() {
     return {
       viewList: ['https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=4005596794,992112216&fm=27&gp=0.jpg', 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1781615267,834481015&fm=27&gp=0.jpg', 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=489423423,2450269323&fm=27&gp=0.jpg'],
