@@ -24,6 +24,16 @@ Vue.use(VueTouchRipple, {
   transition: 'ease'
 })
 
+
+// common componets
+import PicView from '@/components/basic/picview'
+Vue.component('PicView', PicView)
+import Tooltip from '@/components/basic/tooltip'
+Vue.component('Tooltip', Tooltip)
+import BottomTear from '@/components/basic/btear'
+Vue.component('BottomTear', BottomTear)
+
+
 // vue-cookie
 import VueCookie from 'vue-cookie'
 Vue.use(VueCookie)
