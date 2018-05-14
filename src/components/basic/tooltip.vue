@@ -1,5 +1,5 @@
 <template>
-  <div class="tip-wrapper" ref="demo" @mouseenter="handleHover" @mouseleave="handleHoverExit">
+  <div class="tip-wrapper" ref="demo" @mouseenter="handleHover" @mouseleave="handleHoverExit" @click="active">
     <slot><mu-icon v-if="icon" :value="icon" :size="size" :color="color" /></slot>
     <mu-tooltip :label="label" :show="show" :trigger="trigger" :touch="touch" :verticalPosition="verticalPosition" :horizontalPosition="horizontalPosition" />
   </div>
@@ -49,6 +49,9 @@ export default {
     },
     handleHoverExit() {
       this.show = false
+    },
+    active(){
+      this.$emit('click')
     }
   }
 }

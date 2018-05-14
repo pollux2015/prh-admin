@@ -3,7 +3,7 @@
     <div class="form-top-funs">
       <Tooltip label="保存项目" icon="check_circle" :size="32">
       </Tooltip>
-      <Tooltip label="关闭" icon="cancel" :size="32" color="red" @click="closePage">
+      <Tooltip label="关闭" icon="cancel" :size="32" color="red" @click="$store.commit('REMOVE_TAB_CURRENT')">
       </Tooltip>
     </div>
     <mu-row>
@@ -67,9 +67,7 @@ export default {
     }
   },
   methods: {
-    closePage(){
-      this.$store.commit('closePage')
-    }
+    
   }
 }
 

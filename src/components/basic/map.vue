@@ -25,14 +25,16 @@ export default {
       active: false,
       ak: CONFIG.BAIDU_AK,
       center: { lng: 0, lat: 0 },
-      marks: [{ lng: 22, lat: 33.915, name: '北京'}],
+      marks: [{ lng: 0, lat: 0, name: '北京'}],
       zoom: 3
     }
   },
   methods: {
     handler({ BMap, map }) {
-      this.center = this.mark[0]
-      this.zoom = 15
+      setTimeout(() => {
+        this.center = this.mark[0]
+        // this.zoom = 15
+      }, 1000)
     },
     clickMark(mark) {
       mark.panel = !mark.panel

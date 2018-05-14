@@ -11,6 +11,8 @@ export const CLEAR_USER = 'CLEAR_USER'
 export const SET_USER_TOKEN = 'SET_USER_TOKEN'
 
 // tabs
-export const ADD_TAB = 'ADD_TAB'
-export const CLEAR_TAB = 'CLEAR_TAB'
-export const REMOVE_TAB = 'REMOVE_TAB'
+export const ADD_TAB = 'ADD_TAB' // 新增TAB
+export const CLEAR_TAB = 'CLEAR_TAB' // 清除所有TAB
+export const REMOVE_TAB = 'REMOVE_TAB' // 移除TAB
+export const REMOVE_TAB_CURRENT = 'REMOVE_TAB_CURRENT' // 关闭当前页
+
