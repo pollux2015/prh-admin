@@ -27,20 +27,20 @@
         <div class="form-right">
           <h2 class="form-header">{{isEdit ? '编辑房源' : '添加房源'}}</h2>
           <mu-text-field label="房源名称" hintText="请输入房源名称" fullWidth labelFloat />
-          <mu-select-field v-model="formParams.postion" multiple label="房源位置" hintText="请选择" labelFloat style="margin-right: 10px;">
+          <mu-select-field v-model="formParams.postion" label="房源位置" hintText="请选择" labelFloat style="margin-right: 10px;">
             <mu-menu-item value="1" title="宝安区" />
             <mu-menu-item value="2" title="南山区" />
             <mu-menu-item value="3" title="福田区" />
           </mu-select-field>
-          <mu-select-field v-model="formParams.postion" multiple label="所属项目" hintText="请选择" labelFloat style="margin-right: 10px;">
-            <mu-menu-item value="1" title="宝安区" />
-            <mu-menu-item value="2" title="南山区" />
-            <mu-menu-item value="3" title="福田区" />
+          <mu-select-field v-model="formParams.postion" label="所属项目" hintText="请选择" labelFloat style="margin-right: 10px;">
+            <mu-menu-item value="1" title="A花园" />
+            <mu-menu-item value="2" title="B花园" />
+            <mu-menu-item value="3" title="C花园" />
           </mu-select-field>
-          <mu-select-field v-model="formParams.postion" multiple label="所属楼栋" hintText="请选择" labelFloat style="margin-right: 10px;">
-            <mu-menu-item value="1" title="宝安区" />
-            <mu-menu-item value="2" title="南山区" />
-            <mu-menu-item value="3" title="福田区" />
+          <mu-select-field v-model="formParams.postion" label="所属楼栋" hintText="请选择" labelFloat style="margin-right: 10px;">
+            <mu-menu-item value="1" title="1栋" />
+            <mu-menu-item value="2" title="2栋" />
+            <mu-menu-item value="3" title="3栋" />
           </mu-select-field>
           <br>
           <mu-text-field label="所属楼层" hintText="楼栋层数仅能输入数字" labelFloat />

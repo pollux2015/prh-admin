@@ -27,7 +27,7 @@
         <div class="form-right">
           <h2 class="form-header">{{isEdit ? '编辑项目' : '添加项目'}}</h2>
           <mu-text-field label="项目名称" hintText="请输入项目名称" fullWidth labelFloat />
-          <mu-select-field v-model="formParams.postion" multiple label="项目位置" hintText="请选择" labelFloat style="margin-right: 10px;">
+          <mu-select-field v-model="formParams.postion" label="项目位置" hintText="请选择" labelFloat style="margin-right: 10px;">
             <mu-menu-item value="1" title="宝安区" />
             <mu-menu-item value="2" title="南山区" />
             <mu-menu-item value="3" title="福田区" />

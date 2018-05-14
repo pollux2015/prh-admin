@@ -24,12 +24,12 @@
         <div class="form-right">
           <h2 class="form-header">{{isEdit ? '编辑楼栋' : '添加楼栋'}}</h2>
           <mu-text-field label="楼栋名称" hintText="请输入楼栋名称" fullWidth labelFloat />
-          <mu-select-field v-model="formParams.postion" multiple label="楼栋位置" hintText="请选择" labelFloat style="margin-right: 10px;">
+          <mu-select-field v-model="formParams.postion" label="楼栋位置" hintText="请选择" labelFloat style="margin-right: 10px;">
             <mu-menu-item value="1" title="宝安区" />
             <mu-menu-item value="2" title="南山区" />
             <mu-menu-item value="3" title="福田区" />
           </mu-select-field>
-          <mu-select-field v-model="formParams.postion" multiple label="所属项目" hintText="请选择" labelFloat style="margin-right: 10px;">
+          <mu-select-field v-model="formParams.postion" label="所属项目" hintText="请选择" labelFloat style="margin-right: 10px;">
             <mu-menu-item value="1" title="A花园" />
             <mu-menu-item value="2" title="B花园" />
             <mu-menu-item value="3" title="C花园" />
