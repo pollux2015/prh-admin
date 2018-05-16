@@ -1,27 +1,28 @@
 <template>
-  <div class="page-wrapper">
-    <mu-row gutter>
+  <div class="page-wrapper-nopad">
+    <mu-row>
       <mu-col width="100" tablet="40" desktop="20">
-        <mu-card class="side-source-list">
-          <mu-card-header title="房源列表" class="side-source-header" />
-          <mu-icon-button class="side-source-header-icon" icon="cached" />
-          </mu-card-header>
-          <!-- <mu-divider/> -->
-          <div class="side-source-list-field gap-r-l" style="margin-top: -8px">
-            <mu-text-field hintText="请输入房源" fullWidth />
-          </div>
-          <mu-list>
-            <mu-list-item :title="areaItem.name" :key="areaItem.id" v-for="areaItem in sourceList" @click="sideclick(areaItem)">
-              <mu-icon slot="left" value="explore" />
-              <mu-list-item slot="nested" :title="houseItem.name" toggleNested :key="houseItem.id" v-for="houseItem in areaItem.children" @click="sideclick(houseItem)">
-                <mu-icon slot="left" value="account_balance" />
-                <mu-list-item :title="floorItem.name" slot="nested" :key="floorItem.id" v-for="floorItem in houseItem.children" @click="sideclick(floorItem)">
-                  <mu-icon slot="left" value="domain" />
-                </mu-list-item>
+      <div class="side" :style="{height: `${frameSize.onlycontentHeight}px`}">
+        <mu-card-header title="房源列表" class="side-source-header" />
+        <mu-icon-button class="side-source-header-icon" icon="cached" />
+        </mu-card-header>
+        <!-- <mu-divider/> -->
+        <div class="side-source-list-field gap-r-l" style="margin-top: -8px">
+          <mu-text-field hintText="请输入房源" fullWidth />
+        </div>
+        <mu-list>
+          <mu-list-item :title="areaItem.name" :key="areaItem.id" v-for="areaItem in sourceList" @click="sideclick(areaItem)">
+            <mu-icon slot="left" value="explore" />
+            <mu-list-item slot="nested" :title="houseItem.name" toggleNested :key="houseItem.id" v-for="houseItem in areaItem.children" @click="sideclick(houseItem)">
+              <mu-icon slot="left" value="account_balance" />
+              <mu-list-item :title="floorItem.name" slot="nested" :key="floorItem.id" v-for="floorItem in houseItem.children" @click="sideclick(floorItem)">
+                <mu-icon slot="left" value="domain" />
               </mu-list-item>
             </mu-list-item>
-          </mu-list>
-        </mu-card>
+          </mu-list-item>
+        </mu-list>
+      </div>
+        
       </mu-col>
       <mu-col width="100" tablet="60" desktop="80">
         <router-view/>
@@ -33,6 +34,7 @@
 export default {
   data() {
     return {
+      frameSize: this.$store.getters.frameSize,
       sourceList: [{
         id: 0,
         name: '深圳市宝安区',
@@ -109,6 +111,10 @@ export default {
 
 .side-source-list-field>>>.mu-text-field {
   min-height: 0
+}
+
+.side{
+  position: relative;
 }
 
 </style>

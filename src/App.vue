@@ -13,9 +13,10 @@ export default {
 
 </script>
 <style>
-/*body,html{
+body,html{
   overflow: hidden;
-}*/
+  background-color: rgb(236, 236, 236);
+}
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -27,7 +28,9 @@ export default {
   padding: 0 16px;
 }
 
+
 /* gobal font */
+
 .color-red {
   color: #f44336;
 }
@@ -53,13 +56,19 @@ export default {
 }
 
 
+
 /* gobal warpper */
+.page-wrapper,
+.page-wrapper-nopad{
+  position: relative;
+}
 .page-wrapper {
   padding: 15px;
 }
 
 
 /* global form */
+
 .form-wrapper {
   position: relative;
 }
@@ -91,20 +100,60 @@ export default {
   text-align: center;
 }
 
+
 /* dialog */
-.dialog-c-title{
+
+.dialog-c-title {
   font-size: 18px;
 }
-.dialog-c-text{
+
+.dialog-c-text {
   font-size: 14px;
 }
 
-.vue-dialog-button{
+.vue-dialog-button {
   font-size: 14px !important;
 }
 
-.v--modal-overlay{
+.v--modal-overlay {
   background-color: rgba(0, 0, 0, 0.3) !important
+}
+
+.clear {
+  clear: both;
+}
+
+
+/*table-title*/
+
+.table-title {
+  font-weight: 700;
+  
+}
+
+.v-table-header-row{
+  background-color: #f5f5f5;
+}
+
+.v-table-views,
+.v-table-title-cell,
+.v-table-body-cell{
+  border-color: #ddd;
+}
+
+.pager-outer {
+  height: 65px;
+  overflow: hidden;
+  padding-top: 10px;
+}
+
+.pager-count {
+  padding-top: 15px;
+  float: left;
+}
+
+.pager-component {
+  float: right;
 }
 
 </style>

@@ -31,13 +31,17 @@ const state = {
   navList: navList, // 菜单列表
   currentPath: [], // 面包屑数组
   menuTheme: null, // 主题
-  theme: null
+  theme: null,
+  frameSize: {},
 }
 
 // getters
 const getters = {
   navList: (state, getters) => {
     return state.navList
+  },
+  frameSize: (state, getters) => {
+    return state.frameSize
   }
 }
 
@@ -52,47 +56,11 @@ const actions = {
       })
     })
   },
-
   initLayout({ dispatch, commit, state }, data) {
     commit(types.INIT_LAYOUT)
   },
   setMenuList({ dispatch, commit, state }, data) {
-
     commit(types.SET_MENU_LIST, appRouter.slice())
-  },
-  setCurrentPath({ dispatch, commit, state }, currentPageName) {
-    let currentPath = []
-    let openedMenuList = state.menuList.filter(menu => {
-      if (!menu.children) {
-        return menu.name === currentPageName
-      } else {
-        return menu.children.some((child) => {
-          if (child.name === currentPageName) {
-            currentPath.push(child)
-          }
-
-          return child.name === currentPageName
-        })
-      }
-    })
-
-    if (openedMenuList[0] && openedMenuList[0].name !== 'home') {
-      let currentNode = {
-        title: openedMenuList[0].title,
-        // breadcrumb should not show hyperlink if the current node is the parent node
-        path: openedMenuList[0].children ? '' : openedMenuList[0].path,
-        name: openedMenuList[0].name
-      }
-      currentPath.push(currentNode)
-    }
-
-    commit(types.SET_CURRENT_PATH, currentPath.reverse())
-
-    let openedMenuNameList = openedMenuList.map(item => {
-      return item.name
-    })
-
-    commit(types.SET_OPENED_MENU_LIST, openedMenuNameList)
   },
 }
 
@@ -119,7 +87,14 @@ const mutations = {
 
   changeTheme(state, theme) {
     state.menuTheme = theme
+  },
+  [types.SET_FRAME_SIZE](state, frameSize) {
+    frameSize.onlycontentHeight = frameSize.height - 64
+    frameSize.notabsHeight = frameSize.onlycontentHeight - 40
+    state.frameSize = frameSize
   }
+
+  
 }
 
 export default {

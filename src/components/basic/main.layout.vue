@@ -18,9 +18,9 @@
     <div class="main-wrapper" :style="contentStyle">
       <router-view/>
     </div>
-    <div class="main-footer">
+<!--     <div class="main-footer">
       公租房管理系统 ©2017
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -64,9 +64,9 @@ export default {
 
 </script>
 <style scoped>
-.layout {
+/*.layout {
   background-color: rgb(236, 236, 236);
-}
+}*/
 
 .main-slogan {
   font-size: 24px;
@@ -98,7 +98,7 @@ export default {
 }
 
 .main-wrapper {
-  border-radius: 5px;
+  /*border-radius: 5px;*/
 }
 
 .main-footer {

@@ -6,6 +6,8 @@ import App from './App'
 import router from './router'
 import store from './store'
 
+Vue.config.productionTip = false
+
 // font
 import fonts from '@/assets/iconfont/material-icons.css'
 
@@ -27,6 +29,7 @@ Vue.use(VueTouchRipple, {
 // vmodal
 import VModal from 'vue-js-modal'
 Vue.use(VModal, { dialog: true, dynamic: true })
+
 // 封装了vmodal组件相关方法, 调用更加精简
 import SModal from '@/components/basic/vdialog/index.js'
 Vue.use(SModal)
@@ -38,24 +41,46 @@ toastr.options.preventDuplicates = true
 toastr.options.timeOut = 1500
 Vue.prototype.$toastr = toastr
 
-// common componets
+// 导入 table 和 分页组件
+import 'vue-easytable/libs/themes-base/index.css'
+import { VTable, VPagination } from 'vue-easytable'
+Vue.component(VTable.name, VTable)
+Vue.component(VPagination.name, VPagination)
+
+// 自定义全局组件
 import PicView from '@/components/basic/picview'
-Vue.component('PicView', PicView)
 import Tooltip from '@/components/basic/tooltip'
-Vue.component('Tooltip', Tooltip)
 import BottomTear from '@/components/basic/btear'
+Vue.component('PicView', PicView)
+Vue.component('Tooltip', Tooltip)
 Vue.component('BottomTear', BottomTear)
 
-// vue-cookie
+// COOKIE
 import VueCookie from 'vue-cookie'
 Vue.use(VueCookie)
 
-Vue.config.productionTip = false
+// 设置屏幕高度
+const getFrameSize = () => {
+  const width = document.documentElement.clientWidth
+  const height = document.documentElement.clientHeight
+  const obj = { width, height }
+  store.commit('SET_FRAME_SIZE', obj)
+  return obj
+}
+
+setTimeout(() => {
+  window.onresize = function() {
+    getFrameSize()
+  }
+}, 500)
+
+getFrameSize()
+
 
 Vue.use(Vuex)
 
 /* eslint-disable no-new */
-global.app = new Vue({
+new Vue({
   el: '#app',
   router,
   store,

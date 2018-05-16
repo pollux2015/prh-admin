@@ -19,6 +19,7 @@ const houseResourceRouter = [
   { path: 'floor/edit/:id', name: 'house_resource.floor.edit', meta: { title: '编辑楼栋' }, component: resolve => require(['@/components/view/house_resource/floor.edit.vue'], resolve) },
   { path: 'house/add', name: 'house_resource.house.add', meta: { title: '添加房源' }, component: resolve => require(['@/components/view/house_resource/house.edit.vue'], resolve) },
   { path: 'house/edit/:id', name: 'house_resource.house.edit', meta: { title: '编辑房源' }, component: resolve => require(['@/components/view/house_resource/house.edit.vue'], resolve) },
+  { path: 'house/list/:type/:id', name: 'house_resource.list', meta: { title: '房源列表' }, component: resolve => require(['@/components/view/house_resource/house.list.vue'], resolve) },
 ]
 
 // 主菜单路由
