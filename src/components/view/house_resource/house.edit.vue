@@ -1,10 +1,8 @@
 <template>
   <form class="form-wrapper">
     <div class="form-top-funs">
-      <Tooltip label="保存" @click="formSave" icon="check_circle" :size="32">
-      </Tooltip>
-      <Tooltip label="删除" @click="formDelete" icon="cancel" :size="32" color="red">
-      </Tooltip>
+      <Tooltip label="保存" @click="formSave" icon="check_circle" :size="32"></Tooltip>
+      <Tooltip label="删除" @click="formDelete" icon="cancel" :size="32" color="red" v-if="isEdit"></Tooltip>
     </div>
     <mu-row>
       <mu-col width="100" tablet="100" desktop="30">
@@ -62,7 +60,7 @@
           <mu-text-field label="入住人员" hintText="请输入房源名称" fullWidth labelFloat />
           <div class="form-footer">
             <mu-raised-button label="保存" @click="formSave" icon="check_circle" backgroundColor="blue" />
-            <mu-raised-button label="删除" @click="formDelete" icon="cancel" backgroundColor="red" />
+            <mu-raised-button label="删除" @click="formDelete" icon="cancel" backgroundColor="red" v-if="isEdit" />
           </div>
         </div>
       </mu-col>
@@ -84,12 +82,19 @@ export default {
   },
   methods: {
     formSave() {
-      console.log('save')
+      this.$toastr.success('保存成功')
       this.$store.commit('REMOVE_TAB_CURRENT')
     },
     formDelete() {
-      console.log('delete')
-      this.$store.commit('REMOVE_TAB_CURRENT')
+      this.$salert({
+        title: '删除',
+        content: '确定删除当前房源?',
+        btnTxt: '确定删除',
+        handler: () => {
+          this.$modal.hide('alert')
+          this.$store.commit('REMOVE_TAB_CURRENT')
+        }
+      })
     }
   }
 }
