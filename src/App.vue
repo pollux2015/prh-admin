@@ -1,6 +1,9 @@
 <template>
   <div id="app">
+    <!-- 主view -->
     <router-view />
+    <modals-container/>
+    <v-dialog/>
   </div>
 </template>
 <script>
@@ -86,6 +89,22 @@ export default {
 .form-footer .mu-raised-button {
   margin-right: 10px;
   text-align: center;
+}
+
+/* dialog */
+.dialog-c-title{
+  font-size: 18px;
+}
+.dialog-c-text{
+  font-size: 14px;
+}
+
+.vue-dialog-button{
+  font-size: 14px !important;
+}
+
+.v--modal-overlay{
+  background-color: rgba(0, 0, 0, 0.3) !important
 }
 
 </style>

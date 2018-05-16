@@ -24,6 +24,19 @@ Vue.use(VueTouchRipple, {
   transition: 'ease'
 })
 
+// vmodal
+import VModal from 'vue-js-modal'
+Vue.use(VModal, { dialog: true, dynamic: true })
+// 封装了vmodal组件相关方法, 调用更加精简
+import SModal from '@/components/basic/vdialog/index.js'
+Vue.use(SModal)
+
+// toaster
+import toastr from 'toastr'
+toastr.options.preventDuplicates = true
+toastr.options.timeOut = 1500
+import toastrStyle from '@/assets/css/toastr.css'
+Vue.prototype.$toastr = toastr
 
 // common componets
 import PicView from '@/components/basic/picview'
@@ -32,7 +45,6 @@ import Tooltip from '@/components/basic/tooltip'
 Vue.component('Tooltip', Tooltip)
 import BottomTear from '@/components/basic/btear'
 Vue.component('BottomTear', BottomTear)
-
 
 // vue-cookie
 import VueCookie from 'vue-cookie'
@@ -43,7 +55,7 @@ Vue.config.productionTip = false
 Vue.use(Vuex)
 
 /* eslint-disable no-new */
-new Vue({
+global.app = new Vue({
   el: '#app',
   router,
   store,
