@@ -33,9 +33,9 @@ Vue.use(SModal)
 
 // toaster
 import toastr from 'toastr'
+import toastrStyle from '@/assets/css/toastr.css'
 toastr.options.preventDuplicates = true
 toastr.options.timeOut = 1500
-import toastrStyle from '@/assets/css/toastr.css'
 Vue.prototype.$toastr = toastr
 
 // common componets
