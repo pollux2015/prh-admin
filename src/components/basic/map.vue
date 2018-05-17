@@ -8,7 +8,6 @@
   </div>
 </template>
 <script>
-import CONFIG from '@/store/config'
 import BmOverlay from '@/components/basic/map.overlay'
 import { BaiduMap, BmLabel, BmMarker, BmInfoWindow, BmNavigation } from 'vue-baidu-map'
 export default {
@@ -23,7 +22,7 @@ export default {
   data() {
     return {
       active: false,
-      ak: CONFIG.BAIDU_AK,
+      ak: this.$store.getters.BAIDU_AK,
       center: { lng: 0, lat: 0 },
       marks: [{ lng: 0, lat: 0, name: '北京'}],
       zoom: 3
