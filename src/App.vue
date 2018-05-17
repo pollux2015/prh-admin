@@ -146,19 +146,20 @@ body,html{
   border-color: #ddd;
 }
 
-.pager-outer {
-  height: 65px;
-  overflow: hidden;
-  padding-top: 10px;
-}
-
-.pager-count {
+.pager-wrapper {
   padding-top: 15px;
+  margin: 0 auto;
+}
+.pager-total{
+  color: #666;
+  font-weight: 700;
+  line-height: 30px;
   float: left;
 }
 
-.pager-component {
+.page-component{
   float: right;
 }
+
 
 </style>

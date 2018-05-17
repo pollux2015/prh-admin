@@ -27,9 +27,7 @@ export default {
     }
   },
   mounted() {
-    this.$on('aass', () => {
-      console.log(222)
-    })
+
   },
   methods: {
 
@@ -45,7 +43,7 @@ export default {
 
 .page-tools-item {
   background: #eee;
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 .page-tools-item {
