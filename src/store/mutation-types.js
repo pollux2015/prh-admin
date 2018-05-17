@@ -17,3 +17,6 @@ export const CLEAR_TAB = 'CLEAR_TAB' // 清除所有TAB
 export const REMOVE_TAB = 'REMOVE_TAB' // 移除TAB
 export const REMOVE_TAB_CURRENT = 'REMOVE_TAB_CURRENT' // 关闭当前页
 
+// config
+export const SET_PAGE_SIZE = 'SET_PAGE_SIZE' // 关闭当前页
+
