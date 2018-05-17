@@ -16,6 +16,10 @@ import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
 Vue.use(MuseUI)
 
+// lodash
+import lodash from 'lodash'
+Vue.prototype.$lodash = lodash
+
 // ripple
 import VueTouchRipple from 'vue-touch-ripple'
 import 'vue-touch-ripple/dist/vue-touch-ripple.css'
