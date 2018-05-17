@@ -67,7 +67,7 @@ Vue.use(VueCookie)
 
 // 设置frame
 store.commit('SET_FRAME_SIZE')
-setTimeout(()=>{
+setTimeout(() => {
   window.onresize = () => {
     store.commit('SET_FRAME_SIZE')
   }

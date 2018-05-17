@@ -3,8 +3,7 @@ import * as types from '../mutation-types'
 
 // initial state
 const state = {
-  mainTabList: [],
-  tabList: [],
+  tabsObj: {}
 }
 
 // getters
@@ -17,6 +16,7 @@ const getters = {
 
 // actions
 const actions = {
+  
   setTabList({ dispatch, commit, state }, data) {
     // let tabList = []
     // state.menuList.map((item) => {

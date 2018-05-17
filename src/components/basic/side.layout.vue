@@ -4,14 +4,17 @@
       <mu-col width="100" tablet="40" desktop="20">
         <div class="side">
           <mu-card-header title="房源列表" class="side-source-header" />
-          <mu-icon-button class="side-source-header-icon" icon="cached" />
+          <mu-icon-button @click="resetSourceList" class="side-source-header-icon" :disabled="sourceLoading" icon="cached" />
           </mu-card-header>
-          <!-- <mu-divider/> -->
           <div class="side-source-list-field gap-r-l" style="margin-top: -8px">
-            <mu-text-field hintText="请输入房源" fullWidth />
+            <mu-text-field v-model="sourceKey" @input="filterSourceList" :disabled="sourceLoading" hintText="输入房源名称" fullWidth />
           </div>
           <LayoutWrapper :offset="88">
-            <mu-list>
+            <div class="source-loadding" v-if="sourceLoading">
+              <mu-circular-progress :size="30" />
+              <p>房源数据加载中</p>
+            </div>
+            <mu-list v-if="!sourceLoading">
               <mu-list-item :title="areaItem.name" :key="areaItem.id" v-for="areaItem in sourceList" @click="sideclick(areaItem)">
                 <mu-icon slot="left" value="explore" />
                 <mu-list-item slot="nested" :title="houseItem.name" toggleNested :key="houseItem.id" v-for="houseItem in areaItem.children" @click="sideclick(houseItem)">
@@ -35,49 +38,33 @@
 export default {
   data() {
     return {
-      sourceList: [{
-        id: 0,
-        name: '深圳市宝安区',
-        type: 'area',
-        children: [{
-          id: 0,
-          name: 'A花园',
-          type: 'project',
-          children: [{
-            id: 0,
-            name: '1栋',
-            type: 'floor',
-          }, {
-            id: 1,
-            name: '2栋',
-            type: 'floor',
-          }, {
-            id: 2,
-            name: '3栋',
-            type: 'floor',
-          }]
-        }, {
-          id: 1,
-          name: 'B花园',
-          type: 'project',
-          children: [{
-            id: 0,
-            name: '1栋',
-            type: 'floor',
-          }, {
-            id: 1,
-            name: '2栋',
-            type: 'floor',
-          }, {
-            id: 2,
-            name: '3栋',
-            type: 'floor',
-          }]
-        }]
-      }]
+      sourceKey: '',
     }
   },
+  beforeRouteEnter(to, from, next) {
+    next((app) => {
+      app.resetSourceList()
+    })
+  },
+  computed: {
+    sourceLoading() {
+      return this.$store.getters.sourceListLoading
+    },
+    sourceList() {
+      return this.$store.getters.sourceList
+    },
+  },
   methods: {
+    getSourceList(keyword) {
+      this.$store.dispatch('RESET_SOURCE_LIST', keyword)
+    },
+    resetSourceList() {
+      this.sourceKey = ''
+      this.getSourceList()
+    },
+    filterSourceList() {
+      this.$store.dispatch('FILTER_SOURCE_LIST', this.sourceKey)
+    },
     sideclick(activeItem) {
       // 当前菜单主路由名称, 根据主菜单跳转到不同路由
       const routeName = this.$route.name.split('.')[0]
@@ -115,6 +102,15 @@ export default {
 
 .side {
   position: relative;
+}
+
+.source-loadding {
+  text-align: center;
+  padding: 20px;
+}
+
+.source-loadding p {
+  color: #666;
 }
 
 </style>
