@@ -51,30 +51,24 @@ Vue.component(VPagination.name, VPagination)
 import PicView from '@/components/basic/picview'
 import Tooltip from '@/components/basic/tooltip'
 import BottomTear from '@/components/basic/btear'
+import LayoutWrapper from '@/components/basic/layout.wrapper'
 Vue.component('PicView', PicView)
 Vue.component('Tooltip', Tooltip)
 Vue.component('BottomTear', BottomTear)
+Vue.component('LayoutWrapper', LayoutWrapper)
 
 // COOKIE
 import VueCookie from 'vue-cookie'
 Vue.use(VueCookie)
 
-// 设置屏幕高度
-const getFrameSize = () => {
-  const width = document.documentElement.clientWidth
-  const height = document.documentElement.clientHeight
-  const obj = { width, height }
-  store.commit('SET_FRAME_SIZE', obj)
-  return obj
-}
-
-setTimeout(() => {
-  window.onresize = function() {
-    getFrameSize()
+// 设置frame
+store.commit('SET_FRAME_SIZE')
+setTimeout(()=>{
+  window.onresize = () => {
+    store.commit('SET_FRAME_SIZE')
   }
-}, 500)
+}, 1000)
 
-getFrameSize()
 
 
 Vue.use(Vuex)

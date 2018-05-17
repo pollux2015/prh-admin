@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { checkPermission } from '../../libs/util'
 import * as types from '../mutation-types'
+import lodash from 'lodash'
 
 // 菜单配置
 const navList = [{
@@ -66,9 +67,6 @@ const actions = {
 
 // mutations
 const mutations = {
-  [types.SET_CURRENT_PATH](state, currentPath) {
-    state.currentPath = currentPath
-  },
 
   [types.SET_LAYOUT_STATUS](state, status) {
     state.ready = status
@@ -88,13 +86,14 @@ const mutations = {
   changeTheme(state, theme) {
     state.menuTheme = theme
   },
-  [types.SET_FRAME_SIZE](state, frameSize) {
-    frameSize.onlycontentHeight = frameSize.height - 64
-    frameSize.notabsHeight = frameSize.onlycontentHeight - 40
+  [types.SET_FRAME_SIZE](state) {
+    const docElement = document.documentElement
+    let frameSize = {
+      width: docElement.clientWidth,
+      height: docElement.clientHeight
+    }
     state.frameSize = frameSize
   }
-
-  
 }
 
 export default {

@@ -8,12 +8,17 @@
 </template>
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  mounted(){
+    
+  }
 }
 
 </script>
 <style>
 body,html{
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   background-color: rgb(236, 236, 236);
 }
