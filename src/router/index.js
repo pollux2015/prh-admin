@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import NProgress from 'nprogress'
 
 // 路由主视图
 import MainLayout from '@/components/basic/main.layout.vue' // 登录后
@@ -52,14 +51,4 @@ const routerInstance = new Router({
   routes
 })
 
-routerInstance.beforeEach((to, from, next) => {
-    NProgress.start()
-    // router.groupName = to.name.split('.')[0];
-    next();
-})
-
-routerInstance.afterEach(() => {
-    NProgress.done()
-})
-
- export default routerInstance
+export default routerInstance

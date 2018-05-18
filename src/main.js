@@ -5,25 +5,36 @@ import Vuex from 'vuex'
 import App from './App'
 import router from './router'
 import store from './store'
+import MuseUI from 'muse-ui'
+import NProgress from 'nprogress'
+import lodash from 'lodash'
+import toastr from 'toastr'
+import VueCookie from 'vue-cookie'
+import VModal from 'vue-js-modal'
+import VueTouchRipple from 'vue-touch-ripple'
+import { VTable, VPagination } from 'vue-easytable'
 
+// config production
 Vue.config.productionTip = false
 
-// styles
-import fonts from '@/assets/iconfont/material-icons.css'
-import NProgressStyle from '@/assets/css/nprogress.css'
-
-// MuseUI
-import MuseUI from 'muse-ui'
+/**--------------------
+ * common styles
+ ---------------------*/
 import 'muse-ui/dist/muse-ui.css'
-Vue.use(MuseUI)
+import 'vue-touch-ripple/dist/vue-touch-ripple.css'
+import 'vue-easytable/libs/themes-base/index.css'
+import '@/assets/iconfont/material-icons.css'
+import '@/assets/css/nprogress.css'
+import '@/assets/css/toastr.css'
 
-// lodash
-import lodash from 'lodash'
-Vue.prototype.$lodash = lodash
+/**--------------------
+ * global install
+ ---------------------*/
+Vue.use(MuseUI)
+Vue.use(Vuex)
+Vue.use(VueCookie)
 
 // ripple
-import VueTouchRipple from 'vue-touch-ripple'
-import 'vue-touch-ripple/dist/vue-touch-ripple.css'
 Vue.use(VueTouchRipple, {
   color: '#000',
   opacity: 0.1,
@@ -32,27 +43,31 @@ Vue.use(VueTouchRipple, {
 })
 
 // vmodal
-import VModal from 'vue-js-modal'
-Vue.use(VModal, { dialog: true, dynamic: true })
-
-// 封装了vmodal组件相关方法, 调用更加精简
 import SModal from '@/components/basic/vdialog/index.js'
-Vue.use(SModal)
+Vue.use(VModal, { dialog: true, dynamic: true })
+Vue.use(SModal) // 封装了vmodal组件相关方法, 调用更加精简
+
+
+/**--------------------
+ * global vue variable
+ ---------------------*/
+Vue.prototype.$lodash = lodash
 
 // toaster
-import toastr from 'toastr'
-import toastrStyle from '@/assets/css/toastr.css'
 toastr.options.preventDuplicates = true
 toastr.options.timeOut = 1500
 Vue.prototype.$toastr = toastr
 
-// 导入 table 和 分页组件
-import 'vue-easytable/libs/themes-base/index.css'
-import { VTable, VPagination } from 'vue-easytable'
+
+/**--------------------
+ * global components
+ ---------------------*/
+
+// table 和 分页组件
 Vue.component(VTable.name, VTable)
 Vue.component(VPagination.name, VPagination)
 
-// 自定义全局组件
+// 自定义组件
 import PicView from '@/components/basic/picview'
 import Tooltip from '@/components/basic/tooltip'
 import BottomTear from '@/components/basic/btear'
@@ -62,11 +77,10 @@ Vue.component('Tooltip', Tooltip)
 Vue.component('BottomTear', BottomTear)
 Vue.component('LayoutWrapper', LayoutWrapper)
 
-// COOKIE
-import VueCookie from 'vue-cookie'
-Vue.use(VueCookie)
 
-// 设置frame
+/**--------------------
+ * 设置frame
+ ---------------------*/
 store.commit('SET_FRAME_SIZE')
 setTimeout(() => {
   window.onresize = () => {
@@ -74,11 +88,23 @@ setTimeout(() => {
   }
 }, 1000)
 
+/**--------------------
+ * 全局路由
+ ---------------------*/
+router.beforeEach((to, from, next) => {
+  NProgress.start()
+  router.groupName = to.name.split('.')[0];
+  console.log(router.groupName)
+  next();
+})
 
+router.afterEach(() => {
+  NProgress.done()
+})
 
-Vue.use(Vuex)
-
-/* eslint-disable no-new */
+/**--------------------
+ * app instance
+ ---------------------*/
 new Vue({
   el: '#app',
   router,
