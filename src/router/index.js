@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import NProgress from 'nprogress'
+
+// 路由主视图
 import MainLayout from '@/components/basic/main.layout.vue' // 登录后
 import SideLayout from '@/components/basic/side.layout.vue' // 房源Side
 import houseResourceIndex from '@/components/view/house_resource/index.vue' // 房源首页
@@ -45,6 +48,18 @@ const mainRoute = {
 // 系统设置
 const system = []
 const routes = [...basic, mainRoute]
-export default new Router({
+const routerInstance = new Router({
   routes
 })
+
+routerInstance.beforeEach((to, from, next) => {
+    NProgress.start()
+    // router.groupName = to.name.split('.')[0];
+    next();
+})
+
+routerInstance.afterEach(() => {
+    NProgress.done()
+})
+
+ export default routerInstance

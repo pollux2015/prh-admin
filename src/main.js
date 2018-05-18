@@ -8,8 +8,9 @@ import store from './store'
 
 Vue.config.productionTip = false
 
-// font
+// styles
 import fonts from '@/assets/iconfont/material-icons.css'
+import NProgressStyle from '@/assets/css/nprogress.css'
 
 // MuseUI
 import MuseUI from 'muse-ui'
