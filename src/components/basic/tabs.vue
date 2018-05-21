@@ -1,14 +1,19 @@
 <template>
-  <div>
-    <scroll class="wrapper" :scroll-x="true" :scroll-y="false" :list="data"></scroll>
-  </div>
+  <Scroll class="wrapper" :scroll-x="true" :scroll-y="false" :activeName="$route.name" :list="tabList" @removeTab="removeTab" @changeTab="changeTab" />
 </template>
 <script>
-import scroll from '@/components/basic/scroll'
-import lodash from 'lodash'
+import Scroll from '@/components/basic/scroll'
 export default {
   components: {
-    scroll
+    Scroll
+  },
+  props: {
+    list: {
+      type: Array
+    },
+    mainRouter: {
+      type: String
+    }
   },
   data() {
     return {
@@ -16,37 +21,26 @@ export default {
       pulldown: true
     }
   },
-  created() {
-    this.loadData()
+  computed: {
+    currentTabName() {
+      return this.$route.name
+    },
+    tabList() {
+      return this.list || this.$store.getters.tabsMap[this.mainRouter] || []
+    }
   },
   methods: {
-    loadData() {
-      setTimeout(() => {
-        this.data = []
-        for (var i = 0; i < 20; i++) {
-          this.data.push({
-            name: 'TestScoller_' + i,
-            tabname: '首页'
-          })
-        }
-      }, 100)
-
+    removeTab(params) {
+      this.$store.commit('REMOVE_TAB', params.item.name)
+    },
+    changeTab(params) {
+      this.$router.push(params.item)
     }
   }
 }
 
 </script>
-<style type="text/css">
-.content {
-  padding: 0;
-  margin: 0;
-  height: 20px;
-}
+<style scoped>
 
-.tab-item {
-  float: left;
-  display: inline-block;
-  padding: 0 20px;
-}
 
 </style>

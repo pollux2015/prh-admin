@@ -93,12 +93,12 @@ setTimeout(() => {
  ---------------------*/
 router.beforeEach((to, from, next) => {
   NProgress.start()
-  router.groupName = to.name.split('.')[0];
-  console.log(router.groupName)
-  next();
+  store.commit('ADD_TAB', to)
+  next()
 })
 
-router.afterEach(() => {
+router.afterEach((to, from) => {
+  store.commit('SET_TAB_CURRENT', to)
   NProgress.done()
 })
 

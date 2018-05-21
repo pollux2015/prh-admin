@@ -14,7 +14,7 @@ const basic = [
 
 // 房源管理路由
 const houseResourceRouter = [
-  { path: 'project/map', name: 'house_resource.project.map', meta: { title: '项目地图' }, component: resolve => require(['@/components/view/house_resource/project.map.vue'], resolve) },
+  { path: 'project/map/:id', name: 'house_resource.project.map', meta: { title: '项目地图', tabFixed: true }, component: resolve => require(['@/components/view/house_resource/project.map.vue'], resolve) },
   { path: 'project/add', name: 'house_resource.project.add', meta: { title: '添加项目' }, component: resolve => require(['@/components/view/house_resource/project.edit.vue'], resolve) },
   { path: 'project/edit/:id', name: 'house_resource.project.edit', meta: { title: '编辑项目' }, component: resolve => require(['@/components/view/house_resource/project.edit.vue'], resolve) },
   { path: 'floor/add', name: 'house_resource.floor.add', meta: { title: '添加楼栋' }, component: resolve => require(['@/components/view/house_resource/floor.edit.vue'], resolve) },
@@ -26,8 +26,8 @@ const houseResourceRouter = [
 
 // 主菜单路由
 const sourceRoute = [
-  { path: 'tenement', name: 'tenement', meta: { title: '住户管理' }, component: resolve => require(['@/components/view/tenement/index.vue'], resolve) },
-  { path: 'house_resource', name: 'house_resource', meta: { title: '房源管理' }, component: houseResourceIndex, children: houseResourceRouter },
+  { path: 'house_resource', name: 'house_resource', meta: { title: '房源管理', notab: true }, component: houseResourceIndex, children: houseResourceRouter },
+  { path: 'tenement', name: 'tenement', meta: { title: '住户管理', notab: true }, component: resolve => require(['@/components/view/tenement/index.vue'], resolve) },
   { path: 'business', name: 'business', meta: { title: '业务办理' }, component: resolve => require(['@/components/view/business/index.vue'], resolve) },
   { path: 'system', name: 'system', meta: { title: '系统设置' }, component: resolve => require(['@/components/view/system/index.vue'], resolve) }
 ]

@@ -65,7 +65,30 @@ export default {
       return this.$route.name.search('edit') != -1
     }
   },
+  beforeRouteEnter(to, from, next) {
+    next((app) => {
+      app.initPage()
+    })
+  },
+  watch: {
+    '$route' (){
+      this.initPage()
+    },
+  },
   methods: {
+    initPage(){
+      if(this.isEdit){
+        this.$store.commit('CLEAR_TAB')
+        this.$store.commit('ADD_TAB', {
+          name: 'house_resource.list',
+          meta: {title: '房源列表'},
+          params: {
+            id: this.$route.params.id,
+            type: 'floor'
+          }
+        })
+      }
+    },
     formSave() {
       this.$toastr.success('保存成功')
       this.$store.commit('REMOVE_TAB_CURRENT')

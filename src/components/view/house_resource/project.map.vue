@@ -14,7 +14,31 @@ export default {
     return {
       name: 'project.edit',
     }
+  },
+  beforeRouteEnter(to, from, next) {
+    next((app) => {
+      app.initPage()
+    })
+  },
+  watch: {
+    '$route' (){
+      this.initPage()
+    },
+  },
+  methods: {
+    initPage(){
+      this.$store.commit('CLEAR_TAB')
+      this.$store.commit('ADD_TAB', {
+        name: 'house_resource.list',
+        meta: {title: '房源列表'},
+        params: {
+          id: this.$route.params.id,
+          type: 'area'
+        }
+      })
+    }
   }
+
 }
 </script>
 

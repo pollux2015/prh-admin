@@ -7,9 +7,11 @@
     <div class="scroll-content">
       <div ref="listWrapper">
         <div class="list-content" :style="{width: tabList.length*tabwidth + 'px'}">
-          <div class="list-item" :id="'tab_'+ idtarget + '_' + index" :class="{active: activeTab.name == item.name}" v-for="(item, index) in tabList" @click="clickItem($event, item, index)">
-            <span>{{item.name}}</span>
-            <mu-icon value="cancel" v-if="item.visible" :size="18" @click="removeTab(item)" />
+          <div class="list-item" :id="'tab_'+ idtarget + '_' + index" :class="{active: activeTab.name == item.name}" v-for="(item, index) in tabList" @click="clickItem(index, item, index)" @mouseover="toggleItem(item, index, true)" @mouseout="toggleItem(item, index, false)">
+            <span>{{item.title}}</span>
+            <span class="remove-icon" @click.prevent.stop="removeTab(item, index)">
+              <mu-icon value="cancel" v-if="!item.tabFixed && tabList.length > 1" :size="18" />
+            </span>
           </div>
         </div>
       </div>
@@ -21,6 +23,9 @@ import BScroll from 'better-scroll'
 
 export default {
   props: {
+    activeName: {
+      type: String
+    },
     /**
      * 1 滚动的时候会派发scroll事件，会截流。
      * 2 滚动的时候实时派发scroll事件，不会截流。
@@ -115,7 +120,6 @@ export default {
       return rnd;
     },
     tooltipHover(e) {
-      console.log(e)
       this.trigger = e.target
       this.tooltip = true
     },
@@ -127,28 +131,55 @@ export default {
       if (!this.$refs.listWrapper) {
         return
       }
+      this.setActiveByName(this.activeName)
       // better-scroll的初始化
       this.scroll = new BScroll(this.$refs.listWrapper, {
         probeType: this.probeType,
         click: this.click,
         scrollX: this.scrollX
       })
+
       this.scroll.on('scrollEnd', () => {
         this.scrollToEnd = this.scroll.x <= this.scroll.maxScrollX
         this.scrollToStart = this.scroll.x === 0
       })
     },
     clickItem(e, item, index) {
+      this.setActiveByName(item.name)
       this.goIndex(index)
+      this.$emit('clickTab', {
+        item,
+        index
+      })
+    },
+    toggleItem(item, index, tabVisible) {
+      const ele = document.getElementById(`tab_${this.idtarget}_${index}`)
+      let classStr = ele.getAttribute('class')
+      const hasVisible = classStr.search(' tab-visible') != -1
+      if (!tabVisible) {
+        classStr = classStr.replace(' tab-visible', '')
+      } else {
+        classStr += ' tab-visible'
+      }
+      ele.setAttribute('class', classStr)
     },
     goIndex(index) {
-      this.activeTab = this.tabList[index]
       this.activeIndex = index
+      this.activeTab = this.list[this.activeIndex]
       const ele = document.getElementById(`tab_${this.idtarget}_${index}`)
       this.scrollToElement(ele, 200)
+      this.$emit('changeTab', {
+        item: this.activeTab,
+        index
+      })
     },
-    removeTab(item) {
-      console.log(item)
+    removeTab(item, index) {
+      const diff = index - 1
+      this.goIndex(diff >= 0 ? diff : 0)
+      this.$emit('removeTab', {
+        item,
+        index
+      })
     },
     goprev() {
       const diff = this.activeIndex - 1
@@ -177,16 +208,25 @@ export default {
     scrollToElement() {
       // 代理better-scroll的scrollToElement方法
       this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments)
-    }
+    },
+    setActiveByName(name) {
+      // 设置默认active
+      const actveIndex_ = this.$lodash.findIndex(this.list, item => item.name == name)
+      this.actveIndex = actveIndex_ == -1 ? 0 : actveIndex_
+      this.activeTab = this.list[this.actveIndex]
+    },
   },
   watch: {
+    activeName() {
+      this.setActiveByName(this.activeName)
+    },
     // 监听数据的变化，延时refreshDelay时间后调用refresh方法重新计算，保证滚动效果正常
     list() {
       this.tabList = this.list
       setTimeout(() => {
         this.refresh()
       }, this.refreshDelay)
-    }
+    },
   }
 }
 
@@ -243,6 +283,7 @@ export default {
   width: 120px;
   border-right: 1px solid #ddd;
   border-bottom: 2px solid #fff;
+  cursor: default;
   /*margin-left: -1px;*/
 }
 
@@ -258,6 +299,18 @@ export default {
   font-weight: 700;
   color: #7e57c2;
   border-bottom-color: #7e57c2;
+}
+
+.remove-icon {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.tab-visible .remove-icon {
+  visibility: visible;
+  opacity: 1;
 }
 
 </style>
