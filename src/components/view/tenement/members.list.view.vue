@@ -1,33 +1,39 @@
 <template>
   <div class="page-inner">
-    <div class="floor-wrapper">
-      <div class="floor-row" v-for="floorItem in tableData">
-        <strong class="floor-title">{{floorItem.floor}}</strong>
-        <div class="floor-main">
-          <div class="floor-card" :class="{'floor-card-red': !houseItem.members_cnt}" v-for="houseItem in floorItem.houselist">
-            <mu-paper>
-              <div class="floor-card-header">
-                <strong>{{houseItem.house_num}}房</strong>
-                <span class="floor-card-tag">{{houseItem.members_cnt == 0 ? '空置' : `入住${houseItem.members_cnt}人`}}</span>
-              </div>
-              <div class="floor-card-cont">
-                <mu-menu>
-                  <mu-menu-item :title="houseItem.area || '-'" rightIcon="keyboard_arrow_right" :disabled="!houseItem.members_cnt">
-                    <mu-sub-header>共{{houseItem.members_cnt}}名入住人员</mu-sub-header>
-                    <mu-menu-item v-for="memberItem in houseItem.members" :title="memberItem.name" :key="memberItem.id" @click="goEdit(memberItem.id)" leftIcon="person_pin" />
-                  </mu-menu-item>
-                </mu-menu>
-              </div>
-            </mu-paper>
+    <template v-if="!viewLoading">
+      <div class="floor-wrapper">
+        <div class="floor-row" v-for="floorItem in tableData">
+          <strong class="floor-title">{{floorItem.floor}}</strong>
+          <div class="floor-main">
+            <div class="floor-card" :class="{'floor-card-red': !houseItem.members_cnt}" v-for="houseItem in floorItem.houselist">
+              <mu-paper>
+                <div class="floor-card-header">
+                  <strong>{{houseItem.house_num}}房</strong>
+                  <span class="floor-card-tag">{{houseItem.members_cnt == 0 ? '空置' : `入住${houseItem.members_cnt}人`}}</span>
+                </div>
+                <div class="floor-card-cont">
+                  <mu-menu>
+                    <mu-menu-item :title="houseItem.area || '-'" rightIcon="keyboard_arrow_right" :disabled="!houseItem.members_cnt">
+                      <mu-sub-header>共{{houseItem.members_cnt}}名入住人员</mu-sub-header>
+                      <mu-menu-item v-for="memberItem in houseItem.members" :title="memberItem.name" :key="memberItem.id" @click="goEdit(memberItem.id)" leftIcon="person_pin" />
+                    </mu-menu-item>
+                  </mu-menu>
+                </div>
+              </mu-paper>
+            </div>
+            <div class="clear"></div>
           </div>
-          <div class="clear"></div>
         </div>
       </div>
-    </div>
-    <div class="pager-wrapper">
-      <span class="pager-total">共{{pageTotal}}条</span>
-      <v-pagination class="page-component" @page-change="pageChange" @page-size-change="pageSizeChange" :total="pageTotal" :page-size="$store.getters.pagesize" :layout="['prev', 'pager', 'next', 'sizer', 'jumper']"></v-pagination>
-    </div>
+      <div class="pager-wrapper">
+        <span class="pager-total">共{{pageTotal}}条</span>
+        <v-pagination class="page-component" @page-change="pageChange" @page-size-change="pageSizeChange" :total="pageTotal" :page-size="$store.getters.pagesize" :layout="['prev', 'pager', 'next', 'sizer', 'jumper']"></v-pagination>
+      </div>
+    </template>
+    <template v-else>
+      <mu-circular-progress :size="24" /><br>
+      数据准备中, 请稍后...
+    </template>
   </div>
 </template>
 <script>
@@ -68,7 +74,7 @@ const resData = [{
 export default {
   data() {
     return {
-      tableLoading: false,
+      viewLoading: false,
       pageCurrent: 1,
       pageTotal: 130,
       tableSelection: [],
@@ -89,6 +95,10 @@ export default {
   },
   created() {
     this.getTableData(1)
+    this.viewLoading = true
+    setTimeout(() => {
+      this.viewLoading = false
+    }, 800)
   },
   methods: {
     goEdit(id) { // 前往编辑
@@ -100,14 +110,13 @@ export default {
     getTableData(currentPage) { // 获取表格数据
       this.pageCurrent = currentPage || 1
       this.pageSize = this.$store.pagesize
-      this.tableLoading = true
-
+      this.viewLoading = true
       setTimeout(() => {
         // response
         // this.$lodash.forEach(resData, (item) => {item._checked = false})
         this.tableData = resData
         this.pageTotal = 130
-        this.tableLoading = false
+        this.viewLoading = false
       }, 1000)
 
     },

@@ -5,8 +5,8 @@
       <LayoutWrapper offset="tabbar">
         <mu-content-block>
           <div class="page-tools">
-            <mu-flat-button class="page-tools-item" @click="$router.push({name: 'tenement.members.add'})" label="添加住户" icon="account_balance" />
-            <mu-flat-button class="page-tools-item" v-if="$route.name =='tenement.members.list' " @click="changeView" label="切换视图" icon="domain" />
+            <mu-flat-button class="page-tools-item" @click="$router.push({name: 'tenement.members.add'})" label="添加住户" icon="person_add" />
+            <mu-flat-button class="page-tools-item" v-if="$route.name =='tenement.members.list' " @click="changeView" label="切换视图" :icon="$store.getters.membersView =='card' ? 'menu' : 'view_module'" />
           </div>
           <router-view />
         </mu-content-block>
