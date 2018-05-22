@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <mu-paper>
+    <mu-paper v-if="$route.name != 'tenement'">
       <Tabs class="page-tabs" main-router="tenement" />
       <LayoutWrapper offset="tabbar">
         <mu-content-block>

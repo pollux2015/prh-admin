@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <mu-paper>
+    <mu-paper v-if="$route.name != 'house_resource'">
       <Tabs class="page-tabs" main-router="house_resource" />
       <LayoutWrapper offset="tabbar">
         <mu-content-block>
