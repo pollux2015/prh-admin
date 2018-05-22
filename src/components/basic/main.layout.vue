@@ -18,29 +18,28 @@
     <div class="main-wrapper" :style="contentStyle">
       <router-view/>
     </div>
-<!--     <div class="main-footer">
+    <!--     <div class="main-footer">
       公租房管理系统 ©2017
     </div> -->
   </div>
 </template>
 <script>
-import Tabs from '@/components/basic/tabs'
-
 export default {
-  components: {
-    Tabs
-  },
   data() {
     return {
       contentStyle: {},
       navList: this.$store.getters.navList,
-      activeTab: 'home'
     }
   },
   created() {
     this.setContentStyle()
     window.onresize = () => {
       this.setContentStyle()
+    }
+  },
+  computed: {
+    activeTab() {
+      return this.$route.name.split('.')[0]
     }
   },
   methods: {
@@ -54,7 +53,6 @@ export default {
       return clientH - 64 - 54 - 30
     },
     handleTabChange(val) {
-      this.activeTab = val
       this.$router.push({
         name: val
       })
