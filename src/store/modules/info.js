@@ -3,40 +3,40 @@ import * as types from '../mutation-types'
 import lodash from 'lodash'
 
 const defaultSourceList = [{
-  id: 0,
+  id: 1,
   name: '深圳市宝安区',
   type: 'area',
   children: [{
-    id: 0,
+    id: 11,
     name: 'A花园',
     type: 'project',
     children: [{
-      id: 0,
+      id: 111,
       name: '1栋',
       type: 'floor',
     }, {
-      id: 1,
+      id: 112,
       name: '2栋',
       type: 'floor',
     }, {
-      id: 2,
+      id: 113,
       name: '3栋',
       type: 'floor',
     }]
   }, {
-    id: 1,
+    id: 12,
     name: 'B花园',
     type: 'project',
     children: [{
-      id: 0,
+      id: 121,
       name: '1栋',
       type: 'floor',
     }, {
-      id: 1,
+      id: 122,
       name: '2栋',
       type: 'floor',
     }, {
-      id: 2,
+      id: 123,
       name: '3栋',
       type: 'floor',
     }]
@@ -46,13 +46,15 @@ const defaultSourceList = [{
 const state = {
   sourceListLoading: true, // 房源加载中
   sourceListOrg: [], // 房源源数据
-  sourceList: [] // 房源列表
+  sourceList: [], // 房源列表
+  sourceListActive: {}
 }
 
 // getters
 const getters = {
   sourceListLoading: state => state.sourceListLoading,
   sourceListOrg: state => state.sourceListOrg,
+  sourceListActive: state => state.sourceListActive,
   sourceList: state => state.sourceList
 }
 
@@ -61,13 +63,14 @@ const actions = {
   [types.RESET_SOURCE_LIST]: ({ commit }) => {
     commit('sourceListLoading', true)
 
-    setTimeout(() => {
-      const sourceList = defaultSourceList
-      commit('sourceListLoading', false)
-      commit('RESET_SOURCE_LIST', sourceList)
-      commit('RESET_SOURCE_LIST_ORG', sourceList)
-      return sourceList
-    }, 1500)
+    const sourceList = defaultSourceList
+    commit('sourceListLoading', false)
+    commit('RESET_SOURCE_LIST', sourceList)
+    commit('RESET_SOURCE_LIST_ORG', sourceList)
+    return {
+      code: 1,
+      data: sourceList
+    }
   },
   [types.FILTER_SOURCE_LIST]: ({ state, commit }, keyword) => {
 
@@ -102,6 +105,9 @@ const mutations = {
   },
   [types.RESET_SOURCE_LIST](state, source) {
     state.sourceList = source
+  },
+  [types.SET_SOURCE_LIST_ACTIVE](state, activeObj) {
+    state.sourceListActive = activeObj
   }
 }
 

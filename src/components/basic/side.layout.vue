@@ -14,12 +14,12 @@
               <mu-circular-progress :size="30" />
               <p>房源数据加载中</p>
             </div>
-            <mu-list v-if="!sourceLoading">
-              <mu-list-item :title="areaItem.name" :key="areaItem.id" v-for="areaItem in sourceList" @click="sideclick(areaItem)">
+            <mu-list v-if="!sourceLoading" v-model="activeId">
+              <mu-list-item :title="areaItem.name" :key="areaItem.id" :value="areaItem.id" v-for="areaItem in sourceList" @click="setActive(areaItem)">
                 <mu-icon slot="left" value="explore" />
-                <mu-list-item slot="nested" :title="houseItem.name" toggleNested :key="houseItem.id" v-for="houseItem in areaItem.children" @click="sideclick(houseItem)">
+                <mu-list-item slot="nested" :title="houseItem.name" toggleNested :key="houseItem.id" :value="houseItem.id" v-for="houseItem in areaItem.children" @click="setActive(houseItem)">
                   <mu-icon slot="left" value="account_balance" />
-                  <mu-list-item :title="floorItem.name" slot="nested" :key="floorItem.id" v-for="floorItem in houseItem.children" @click="sideclick(floorItem)">
+                  <mu-list-item :title="floorItem.name" slot="nested" :key="floorItem.id" :value="floorItem.id" v-for="floorItem in houseItem.children" @click="setActive(floorItem)">
                     <mu-icon slot="left" value="domain" />
                   </mu-list-item>
                 </mu-list-item>
@@ -38,6 +38,7 @@
 export default {
   data() {
     return {
+      activeId: null,
       sourceKey: '',
     }
   },
@@ -54,9 +55,18 @@ export default {
       return this.$store.getters.sourceList
     },
   },
+  watch: {
+    '$store.getters.sourceListActive' (activeObj) {
+      this.activeId = activeObj.id || null
+      this.activeGo(activeObj)
+    }
+  },
   methods: {
-    getSourceList(keyword) {
-      this.$store.dispatch('RESET_SOURCE_LIST', keyword)
+    getSourceList() {
+      this.$store.dispatch('RESET_SOURCE_LIST').then(res => {
+        const rdata = res.data
+        this.setActive(rdata.length >= 1 ? rdata[0] : null)
+      })
     },
     resetSourceList() {
       this.sourceKey = ''
@@ -65,18 +75,39 @@ export default {
     filterSourceList() {
       this.$store.dispatch('FILTER_SOURCE_LIST', this.sourceKey)
     },
-    sideclick(activeItem) {
-      // 当前菜单主路由名称, 根据主菜单跳转到不同路由
+    setActive(activeItem) {
+
       const routeName = this.$route.name.split('.')[0]
-      const ActiveType = activeItem.type
-      if (routeName == 'house_resource') { // 房源管理
+      const activeType = activeItem.type
+      const activeId = activeItem.id
+
+      this.$store.commit('SET_SOURCE_LIST_ACTIVE', {
+        type: activeType,
+        id: activeId,
+        mainRouter: routeName
+      })
+    },
+    activeGo(activeItem) {
+
+      if (!activeItem) {
         this.$router.push({
-          name: ActiveType == 'area' ? 'house_resource.project.map' : `house_resource.${ActiveType}.edit`,
+          name: 'house_resource'
+        })
+      }
+
+      const activeType = activeItem.type
+      const activeId = activeItem.id
+      const activeMainRouter = activeItem.mainRouter
+
+      // 当前菜单主路由名称, 根据主菜单跳转到不同路由
+      if (activeMainRouter == 'house_resource') { // 房源管理
+        this.$router.push({
+          name: activeType == 'area' ? 'house_resource.project.map' : `house_resource.${activeType}.edit`,
           params: {
-            id: activeItem.id
+            id: activeId
           }
         })
-      } else if (routeName == 'tenement') { // 住户管理
+      } else if (activeMainRouter == 'tenement') { // 住户管理
 
       }
     }

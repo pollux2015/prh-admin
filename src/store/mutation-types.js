@@ -25,6 +25,7 @@ export const SET_TAB_VISIBLE = 'SET_TAB_VISIBLE' // 关闭当前页
 // info 全局复用数据
 export const RESET_SOURCE_LIST = 'RESET_SOURCE_LIST' // 房源列表
 export const FILTER_SOURCE_LIST = 'FILTER_SOURCE_LIST' // 房源列表
+export const SET_SOURCE_LIST_ACTIVE = 'SET_SOURCE_LIST_ACTIVE' // 房源选中
 
 // config
 export const SET_PAGE_SIZE = 'SET_PAGE_SIZE' // 关闭当前页
