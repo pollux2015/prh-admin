@@ -161,6 +161,7 @@ export default {
 .floor-card {
   border: 1px solid #e6e6e6;
   width: 20%;
+  max-width: 240px;
   margin: 0 20px 20px 0;
   float: left;
 }
