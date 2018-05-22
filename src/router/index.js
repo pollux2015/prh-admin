@@ -5,6 +5,7 @@ import Router from 'vue-router'
 import MainLayout from '@/components/basic/main.layout.vue' // 登录后
 import SideLayout from '@/components/basic/side.layout.vue' // 房源Side
 import houseResourceIndex from '@/components/view/house_resource/index.vue' // 房源首页
+import tenementIndex from '@/components/view/tenement/index.vue' // 租户首页
 
 Vue.use(Router)
 
@@ -24,10 +25,17 @@ const houseResourceRouter = [
   { path: 'house/list/:type/:id', name: 'house_resource.list', meta: { title: '房源列表', tabFixed: true }, component: resolve => require(['@/components/view/house_resource/house.list.vue'], resolve) },
 ]
 
+// 住户管理路由
+const tenementRouter = [
+  { path: 'members/add', name: 'tenement.members.add', meta: { title: '添加人员' }, component: resolve => require(['@/components/view/tenement/members.edit.vue'], resolve) },
+  { path: 'members/edit/:id', name: 'tenement.members.edit', meta: { title: '编辑人员' }, component: resolve => require(['@/components/view/tenement/members.edit.vue'], resolve) },
+  { path: 'members/list/:type/:id', name: 'tenement.members.list', meta: { title: '人员列表', tabFixed: true }, component: resolve => require(['@/components/view/tenement/members.list.vue'], resolve) },
+]
+
 // 主菜单路由
 const sourceRoute = [
-  { path: 'house_resource', name: 'house_resource', meta: { title: '房源管理', notab: true }, component: houseResourceIndex, children: houseResourceRouter },
-  { path: 'tenement', name: 'tenement', meta: { title: '住户管理', notab: true }, component: resolve => require(['@/components/view/tenement/index.vue'], resolve) },
+  { path: 'house_resource', name: 'house_resource', meta: { title: '房源管理'}, component: houseResourceIndex, children: houseResourceRouter },
+  { path: 'tenement', name: 'tenement', meta: { title: '住户管理'}, component: tenementIndex,  children: tenementRouter},
   { path: 'business', name: 'business', meta: { title: '业务办理' }, component: resolve => require(['@/components/view/business/index.vue'], resolve) },
   { path: 'system', name: 'system', meta: { title: '系统设置' }, component: resolve => require(['@/components/view/system/index.vue'], resolve) }
 ]

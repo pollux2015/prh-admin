@@ -98,7 +98,6 @@ export default {
       const activeType = activeItem.type
       const activeId = activeItem.id
       const activeMainRouter = activeItem.mainRouter
-
       // 当前菜单主路由名称, 根据主菜单跳转到不同路由
       if (activeMainRouter == 'house_resource') { // 房源管理
         this.$router.push({
@@ -108,7 +107,14 @@ export default {
           }
         })
       } else if (activeMainRouter == 'tenement') { // 住户管理
-
+        this.$store.commit('CLEAR_TAB')
+        this.$router.push({
+          name: `tenement.members.list`,
+          params: {
+            id: activeId,
+            type: activeType
+          }
+        })
       }
     }
   }

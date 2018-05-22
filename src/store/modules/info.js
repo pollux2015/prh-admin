@@ -47,7 +47,8 @@ const state = {
   sourceListLoading: true, // 房源加载中
   sourceListOrg: [], // 房源源数据
   sourceList: [], // 房源列表
-  sourceListActive: {}
+  sourceListActive: {},
+  membersView: 'table', // 人员管理视图 [table, card]
 }
 
 // getters
@@ -55,7 +56,8 @@ const getters = {
   sourceListLoading: state => state.sourceListLoading,
   sourceListOrg: state => state.sourceListOrg,
   sourceListActive: state => state.sourceListActive,
-  sourceList: state => state.sourceList
+  sourceList: state => state.sourceList,
+  membersView: state => state.membersView,
 }
 
 // actions
@@ -108,7 +110,10 @@ const mutations = {
   },
   [types.SET_SOURCE_LIST_ACTIVE](state, activeObj) {
     state.sourceListActive = activeObj
-  }
+  },
+  [types.SET_MEMBERS_VIEW](state, view) {
+    state.membersView = view || 'table'
+  },
 }
 
 export default {

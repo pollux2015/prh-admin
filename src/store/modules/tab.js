@@ -78,9 +78,9 @@ const mutations = {
     const routerNameStrAr = state.currentRouter.name.split('.')
     const mainRouterName = routerNameStrAr[0]
     state.tabsMap[mainRouterName].splice(0, state.tabsMap[mainRouterName].length)
-    if(!alltabs){
-      state.tabsMap[mainRouterName].push(state.currentRouter)
-    }
+    // if(!alltabs){
+    //   state.tabsMap[mainRouterName].push(state.currentRouter)
+    // }
   },
   // 设置当前路由
   [types.SET_TAB_CURRENT](state, routerObj) {
@@ -135,8 +135,6 @@ const mutations = {
     // 若已存在则移除重复
     // mutations.REMOVE_TAB(state, routerName)
 
-    
-    console.log(routerName)
     // 添加路由
     const curRouterIndex = mutations.INDEX_TAB(state, routerName)
     if (curRouterIndex != -1) {

@@ -1,6 +1,9 @@
 <template>
   <div class="layout-wrapper" :style="layoutStyle">
-    <slot>内容高度{{$store.getters.frameSize.onlycontentHeight}}</slot>
+    <slot>
+      <mu-circular-progress :size="40"/>
+      <!-- 内容高度{{$store.getters.frameSize.onlycontentHeight}} -->
+    </slot>
   </div>
 </template>
 <script>

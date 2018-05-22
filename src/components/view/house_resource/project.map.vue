@@ -30,7 +30,7 @@ export default {
       this.$store.commit('CLEAR_TAB')
       this.$store.commit('ADD_TAB', {
         name: 'house_resource.list',
-        meta: {title: '房源列表'},
+        meta: {title: '房源列表', tabFixed: true},
         params: {
           id: this.$route.params.id,
           type: 'area'
