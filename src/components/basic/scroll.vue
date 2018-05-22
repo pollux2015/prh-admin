@@ -9,8 +9,8 @@
         <div class="list-content" :style="{width: tabList.length*tabwidth + 'px'}">
           <div class="list-item" :id="'tab_'+ idtarget + '_' + index" :class="{active: activeTab.name == item.name}" v-for="(item, index) in tabList" @click="clickItem(index, item, index)" @mouseover="toggleItem(item, index, true)" @mouseout="toggleItem(item, index, false)">
             <span>{{item.title}}</span>
-            <span class="remove-icon" @click.prevent.stop="removeTab(item, index)">
-              <mu-icon value="cancel" v-if="!item.tabFixed && tabList.length > 1" :size="18" />
+            <span class="remove-icon" @click.prevent.stop="removeTab(item, index)" v-if="!item.tabFixed && tabList.length > 1">
+              <mu-icon value="cancel" :size="18" />
             </span>
           </div>
         </div>

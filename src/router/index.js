@@ -16,12 +16,12 @@ const basic = [
 const houseResourceRouter = [
   { path: 'project/map/:id', name: 'house_resource.project.map', meta: { title: '项目地图', tabFixed: true }, component: resolve => require(['@/components/view/house_resource/project.map.vue'], resolve) },
   { path: 'project/add', name: 'house_resource.project.add', meta: { title: '添加项目' }, component: resolve => require(['@/components/view/house_resource/project.edit.vue'], resolve) },
-  { path: 'project/edit/:id', name: 'house_resource.project.edit', meta: { title: '编辑项目' }, component: resolve => require(['@/components/view/house_resource/project.edit.vue'], resolve) },
+  { path: 'project/edit/:id', name: 'house_resource.project.edit', meta: { title: '编辑项目', tabFixed: true }, component: resolve => require(['@/components/view/house_resource/project.edit.vue'], resolve) },
   { path: 'floor/add', name: 'house_resource.floor.add', meta: { title: '添加楼栋' }, component: resolve => require(['@/components/view/house_resource/floor.edit.vue'], resolve) },
-  { path: 'floor/edit/:id', name: 'house_resource.floor.edit', meta: { title: '编辑楼栋' }, component: resolve => require(['@/components/view/house_resource/floor.edit.vue'], resolve) },
+  { path: 'floor/edit/:id', name: 'house_resource.floor.edit', meta: { title: '编辑楼栋', tabFixed: true }, component: resolve => require(['@/components/view/house_resource/floor.edit.vue'], resolve) },
   { path: 'house/add', name: 'house_resource.house.add', meta: { title: '添加房源' }, component: resolve => require(['@/components/view/house_resource/house.edit.vue'], resolve) },
   { path: 'house/edit/:id', name: 'house_resource.house.edit', meta: { title: '编辑房源' }, component: resolve => require(['@/components/view/house_resource/house.edit.vue'], resolve) },
-  { path: 'house/list/:type/:id', name: 'house_resource.list', meta: { title: '房源列表' }, component: resolve => require(['@/components/view/house_resource/house.list.vue'], resolve) },
+  { path: 'house/list/:type/:id', name: 'house_resource.list', meta: { title: '房源列表', tabFixed: true }, component: resolve => require(['@/components/view/house_resource/house.list.vue'], resolve) },
 ]
 
 // 主菜单路由
