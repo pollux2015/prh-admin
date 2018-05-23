@@ -75,9 +75,12 @@ const mutations = {
   },
   // 清除ALL
   [types.CLEAR_TAB](state, alltabs) {
+
     const routerNameStrAr = state.currentRouter.name.split('.')
     const mainRouterName = routerNameStrAr[0]
-    state.tabsMap[mainRouterName].splice(0, state.tabsMap[mainRouterName].length)
+    if(state.tabsMap[mainRouterName]){
+      state.tabsMap[mainRouterName].splice(0, state.tabsMap[mainRouterName].length)
+    }
     // if(!alltabs){
     //   state.tabsMap[mainRouterName].push(state.currentRouter)
     // }

@@ -72,10 +72,12 @@ import PicView from '@/components/basic/picview'
 import Tooltip from '@/components/basic/tooltip'
 import BottomTear from '@/components/basic/btear'
 import LayoutWrapper from '@/components/basic/layout.wrapper'
+import Tabs from '@/components/basic/tabs'
 Vue.component('PicView', PicView)
 Vue.component('Tooltip', Tooltip)
 Vue.component('BottomTear', BottomTear)
 Vue.component('LayoutWrapper', LayoutWrapper)
+Vue.component('Tabs', Tabs)
 
 
 /**--------------------
