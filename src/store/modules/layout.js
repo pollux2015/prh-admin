@@ -19,7 +19,7 @@ const navList = [{
 }, {
   name: '业务办理',
   icon: 'comment',
-  routeName: 'business'
+  routeName: 'business.members.identify.list'
 }, {
   name: '系统设置',
   icon: 'settings',
