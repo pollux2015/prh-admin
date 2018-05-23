@@ -2,8 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // 路由主视图
-import MainLayout from '@/components/basic/main.layout.vue' // 登录后
-import SideLayout from '@/components/basic/side.layout.vue' // 房源Side
 import houseResourceIndex from '@/components/view/house_resource/index.vue' // 房源首页
 import tenementIndex from '@/components/view/tenement/index.vue' // 租户首页
 
@@ -32,21 +30,39 @@ const tenementRouter = [
   { path: 'members/list/:type/:id', name: 'tenement.members.list', meta: { title: '人员列表', tabFixed: true }, component: resolve => require(['@/components/view/tenement/members.list.vue'], resolve) },
 ]
 
-// 主菜单路由
-const sourceRoute = [
-  { path: 'house_resource', name: 'house_resource', meta: { title: '房源管理'}, component: houseResourceIndex, children: houseResourceRouter },
-  { path: 'tenement', name: 'tenement', meta: { title: '住户管理'}, component: tenementIndex,  children: tenementRouter},
-  { path: 'business', name: 'business', meta: { title: '业务办理' }, component: resolve => require(['@/components/view/business/index.vue'], resolve) },
-  { path: 'system', name: 'system', meta: { title: '系统设置' }, component: resolve => require(['@/components/view/system/index.vue'], resolve) }
+// 业务办理路由
+const businessRouter = [
+  { path: 'members/identify/list', name: 'business.members.identify.list', meta: { title: '人员信息审核' }, component: resolve => require(['@/components/view/business/members.identify.list.vue'], resolve) },
+  { path: 'members/identify/info/:id', name: 'business.members.identify.info', meta: { title: '人员信息审核详情' }, component: resolve => require(['@/components/view/business/members.identify.info.vue'], resolve) },
+  { path: 'strangers/notice/list', name: 'business.strangers.notice.list', meta: { title: '陌生人提醒' }, component: resolve => require(['@/components/view/business/strangers.notice.list.vue'], resolve) },
+  { path: 'strangers/notice/info/:id', name: 'business.strangers.notice.info', meta: { title: '陌生人提醒详情' }, component: resolve => require(['@/components/view/business/strangers.notice.info.vue'], resolve) },
 ]
 
+// 主菜单路由
 const mainRoute = {
   path: '/main',
   name: 'main',
-  component: MainLayout,
+  component: resolve => require(['@/components/basic/main.layout.vue'], resolve),
   children: [
     { path: 'home', name: 'home', meta: { title: '首页' }, component: resolve => require(['@/components/view/home.vue'], resolve) },
-    { path: 'side', name: 'source', component: SideLayout, children: sourceRoute},
+    {
+      path: 'source',
+      name: 'source',
+      component: resolve => require(['@/components/basic/side.layout.vue'], resolve),
+      children: [
+        { path: 'house_resource', name: 'house_resource', meta: { title: '房源管理', notab: true }, component: houseResourceIndex, children: houseResourceRouter },
+        { path: 'tenement', name: 'tenement', meta: { title: '住户管理', notab: true }, component: tenementIndex, children: tenementRouter },
+      ]
+    },
+    {
+      path: 'bside',
+      name: 'bside',
+      component: resolve => require(['@/components/view/business/side.layout.vue'], resolve),
+      children: [
+        { path: 'business', name: 'business', meta: { title: '业务办理', notab: true }, component: resolve => require(['@/components/view/business/index.vue'], resolve) , children: businessRouter},
+        { path: 'system', name: 'system', meta: { title: '系统设置', notab: true }, component: resolve => require(['@/components/view/system/index.vue'], resolve) }
+      ]
+    },
   ]
 }
 
