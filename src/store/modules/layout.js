@@ -3,33 +3,30 @@ import { checkPermission } from '../../libs/util'
 import * as types from '../mutation-types'
 import lodash from 'lodash'
 
-// 菜单配置
-const navList = [{
-  name: '首页',
-  icon: 'home',
-  routeName: 'home'
-}, {
-  name: '房源管理',
-  icon: 'store',
-  routeName: 'house_resource'
-}, {
-  name: '住户管理',
-  icon: 'contacts',
-  routeName: 'tenement'
-}, {
-  name: '业务办理',
-  icon: 'comment',
-  routeName: 'business.members.identify.list'
-}, {
-  name: '系统设置',
-  icon: 'settings',
-  routeName: 'system'
-}]
-
 // initial state
 const state = {
   ready: false, // 主界面
-  navList: navList, // 菜单列表
+  navList: [{
+    name: '首页',
+    icon: 'home',
+    routeName: 'home'
+  }, {
+    name: '房源管理',
+    icon: 'store',
+    routeName: 'house_resource'
+  }, {
+    name: '住户管理',
+    icon: 'contacts',
+    routeName: 'tenement'
+  }, {
+    name: '业务办理',
+    icon: 'comment',
+    routeName: 'business.members.identify.list'
+  }, {
+    name: '系统设置',
+    icon: 'settings',
+    routeName: 'system'
+  }], // 菜单列表
   currentPath: [], // 面包屑数组
   menuTheme: null, // 主题
   theme: null,
