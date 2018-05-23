@@ -59,7 +59,7 @@ const mainRoute = {
       name: 'bside',
       component: resolve => require(['@/components/view/business/side.layout.vue'], resolve),
       children: [
-        { path: 'business', name: 'business', meta: { title: '业务办理', notab: true }, component: resolve => require(['@/components/view/business/index.vue'], resolve) , children: businessRouter},
+        { path: 'business', name: 'business', meta: { title: '业务办理', notab: true }, redirect: { name: 'business.members.identify.list' }, component: resolve => require(['@/components/view/business/index.vue'], resolve), children: businessRouter },
         { path: 'system', name: 'system', meta: { title: '系统设置', notab: true }, component: resolve => require(['@/components/view/system/index.vue'], resolve) }
       ]
     },

@@ -9,23 +9,23 @@ const state = {
   navList: [{
     name: '首页',
     icon: 'home',
-    routeName: 'home'
+    router: 'home'
   }, {
     name: '房源管理',
     icon: 'store',
-    routeName: 'house_resource'
+    router: 'house_resource'
   }, {
     name: '住户管理',
     icon: 'contacts',
-    routeName: 'tenement'
+    router: 'tenement'
   }, {
     name: '业务办理',
     icon: 'comment',
-    routeName: 'business.members.identify.list'
+    router: 'business'
   }, {
     name: '系统设置',
     icon: 'settings',
-    routeName: 'system'
+    router: 'system'
   }], // 菜单列表
   currentPath: [], // 面包屑数组
   menuTheme: null, // 主题
