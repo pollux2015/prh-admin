@@ -15,11 +15,7 @@
   </div>
 </template>
 <script>
-import Tabs from '@/components/basic/tabs'
 export default {
-  components: {
-    Tabs
-  },
   data() {
     return {
 
