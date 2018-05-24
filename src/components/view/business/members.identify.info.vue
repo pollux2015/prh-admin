@@ -4,7 +4,7 @@
       <Tooltip label="保存" @click="formSave" icon="check_circle" :size="32"></Tooltip>
       <Tooltip label="删除" @click="formDelete" icon="cancel" :size="32" color="red"></Tooltip>
     </div>
-    <div class="form-right">
+    <div>
       <h2 class="form-header">人员信息审核</h2>
       <div class="card-info">
         <div class="card-info-img">
