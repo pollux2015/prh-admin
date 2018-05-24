@@ -38,6 +38,16 @@ const businessRouter = [
   { path: 'strangers/notice/info/:id', name: 'business.strangers.notice.info', meta: { title: '陌生人提醒详情' }, component: resolve => require(['@/components/view/business/strangers.notice.info.vue'], resolve) },
 ]
 
+// 系统设置路由
+const systemRouter = [
+  { path: 'support/project', name: 'system.support.project', meta: { title: '项目配套' }, component: resolve => require(['@/components/view/system/support.project.vue'], resolve) },
+  { path: 'support/floor', name: 'system.support.floor', meta: { title: '楼栋配套' }, component: resolve => require(['@/components/view/system/support.project.vue'], resolve) },
+  { path: 'support/house', name: 'system.support.house', meta: { title: '房源配套' }, component: resolve => require(['@/components/view/system/support.project.vue'], resolve) },
+  { path: 'house/type', name: 'system.house.type', meta: { title: '户型管理' }, component: resolve => require(['@/components/view/system/house.type.vue'], resolve) },
+  { path: 'set/info', name: 'system.set.info', meta: { title: '个人设置' }, component: resolve => require(['@/components/view/system/info.vue'], resolve) },
+  { path: 'set/passwd', name: 'system.set.passwd', meta: { title: '设置密码' }, component: resolve => require(['@/components/view/system/passwd.vue'], resolve) },
+]
+
 // 主菜单路由
 const mainRoute = {
   path: '/main',
@@ -55,12 +65,19 @@ const mainRoute = {
       ]
     },
     {
-      path: 'bside',
-      name: 'bside',
+      path: 'aside',
+      name: 'aside',
       component: resolve => require(['@/components/view/business/side.layout.vue'], resolve),
       children: [
         { path: 'business', name: 'business', meta: { title: '业务办理', notab: true }, redirect: { name: 'business.members.identify.list' }, component: resolve => require(['@/components/view/business/index.vue'], resolve), children: businessRouter },
-        { path: 'system', name: 'system', meta: { title: '系统设置', notab: true }, component: resolve => require(['@/components/view/system/index.vue'], resolve) }
+      ]
+    },
+    {
+      path: 'bside',
+      name: 'bside',
+      component: resolve => require(['@/components/view/system/side.layout.vue'], resolve),
+      children: [
+        { path: 'system', name: 'system', meta: { title: '系统设置', notab: true }, component: resolve => require(['@/components/view/system/index.vue'], resolve), children: systemRouter }
       ]
     },
   ]

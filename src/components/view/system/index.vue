@@ -1,6 +1,13 @@
 <template>
   <div class="page">
-    {{name}}
+    <mu-paper>
+      <!-- <Tabs class="page-tabs" main-router="system" /> -->
+      <LayoutWrapper>
+        <mu-content-block>
+          <router-view />
+        </mu-content-block>
+      </LayoutWrapper>
+    </mu-paper>
   </div>
 </template>
 
