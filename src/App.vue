@@ -161,5 +161,37 @@ body,html{
   float: right;
 }
 
+.clearfix:after {
+   content:""; 
+   display: block; 
+   clear:both; 
+}
+
+.tag{
+  font-weight: 0;
+  background-color: #cecece;
+  padding: 0 15px;
+  text-align: center;
+  border-radius: 20px;
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+}
+
+.tag-error{
+  color: #fff;
+  background-color: #f44336;
+}
+
+.tag-blue{
+  color: #fff;
+  background-color: #2196f3;
+}
+
+.tag-purple{
+  color: #fff;
+  background-color: #9c27b0;
+}
+
 
 </style>
