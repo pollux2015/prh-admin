@@ -281,6 +281,8 @@ export default {
   font-size: 14px;
   padding: 10px;
   width: 120px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   border-right: 1px solid #ddd;
   border-bottom: 2px solid #fff;
   cursor: default;
