@@ -32,8 +32,8 @@ const tenementRouter = [
 
 // 业务办理路由
 const businessRouter = [
-  { path: 'members/identify/list', name: 'business.members.identify.list', meta: { title: '人员信息审核' }, component: resolve => require(['@/components/view/business/members.identify.list.vue'], resolve) },
-  { path: 'members/identify/info/:id', name: 'business.members.identify.info', meta: { title: '人员信息审核详情' }, component: resolve => require(['@/components/view/business/members.identify.info.vue'], resolve) },
+  { path: 'members/identify/list', name: 'business.members.identify.list', meta: { title: '人员审核' }, component: resolve => require(['@/components/view/business/members.identify.list.vue'], resolve) },
+  { path: 'members/identify/info/:id', name: 'business.members.identify.info', meta: { title: '人员审核详情' }, component: resolve => require(['@/components/view/business/members.identify.info.vue'], resolve) },
   { path: 'strangers/notice/list', name: 'business.strangers.notice.list', meta: { title: '陌生人提醒' }, component: resolve => require(['@/components/view/business/strangers.notice.list.vue'], resolve) },
   { path: 'strangers/notice/info/:id', name: 'business.strangers.notice.info', meta: { title: '陌生人提醒详情' }, component: resolve => require(['@/components/view/business/strangers.notice.info.vue'], resolve) },
 ]

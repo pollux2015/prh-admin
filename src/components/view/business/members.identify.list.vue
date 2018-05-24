@@ -10,20 +10,24 @@
 </template>
 <script>
 const resData = [
-  { id: "1", "project": "A花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
-  { id: "2", "project": "B花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
-  { id: "3", "project": "C花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
-  { id: "4", "project": "D花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
-  { id: "5", "project": "E花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
-  { id: "6", "project": "F花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
-  { id: "7", "project": "F花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
-  { id: "8", "project": "F花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
-  { id: "9", "project": "F花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
-  { id: "10", "project": "F花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
-  { id: "11", "project": "F花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
-  { id: "12", "project": "F花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
-  { id: "13", "project": "F花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
-  { id: "14", "project": "F花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
+  { id: "1", "order_id": "123", "date_apply": "2018-10-09", "user_apply": "小明", "detail_apply": "添加随住人员", "status": "待处理", "user_identify": "张晓明", "date_identify": "2019-10-10" },
+  { id: "1", "order_id": "123", "date_apply": "2018-10-09", "user_apply": "小明", "detail_apply": "添加随住人员", "status": "待处理", "user_identify": "张晓明", "date_identify": "2019-10-10" },
+  { id: "1", "order_id": "123", "date_apply": "2018-10-09", "user_apply": "小明", "detail_apply": "添加随住人员", "status": "待处理", "user_identify": "张晓明", "date_identify": "2019-10-10" },
+  { id: "1", "order_id": "123", "date_apply": "2018-10-09", "user_apply": "小明", "detail_apply": "添加随住人员", "status": "待处理", "user_identify": "张晓明", "date_identify": "2019-10-10" },
+  { id: "1", "order_id": "123", "date_apply": "2018-10-09", "user_apply": "小明", "detail_apply": "添加随住人员", "status": "待处理", "user_identify": "张晓明", "date_identify": "2019-10-10" },
+  { id: "1", "order_id": "123", "date_apply": "2018-10-09", "user_apply": "小明", "detail_apply": "添加随住人员", "status": "待处理", "user_identify": "张晓明", "date_identify": "2019-10-10" },
+  { id: "1", "order_id": "123", "date_apply": "2018-10-09", "user_apply": "小明", "detail_apply": "添加随住人员", "status": "待处理", "user_identify": "张晓明", "date_identify": "2019-10-10" },
+  { id: "1", "order_id": "123", "date_apply": "2018-10-09", "user_apply": "小明", "detail_apply": "添加随住人员", "status": "待处理", "user_identify": "张晓明", "date_identify": "2019-10-10" },
+  { id: "1", "order_id": "123", "date_apply": "2018-10-09", "user_apply": "小明", "detail_apply": "添加随住人员", "status": "待处理", "user_identify": "张晓明", "date_identify": "2019-10-10" },
+  { id: "1", "order_id": "123", "date_apply": "2018-10-09", "user_apply": "小明", "detail_apply": "添加随住人员", "status": "待处理", "user_identify": "张晓明", "date_identify": "2019-10-10" },
+  { id: "1", "order_id": "123", "date_apply": "2018-10-09", "user_apply": "小明", "detail_apply": "添加随住人员", "status": "待处理", "user_identify": "张晓明", "date_identify": "2019-10-10" },
+  { id: "1", "order_id": "123", "date_apply": "2018-10-09", "user_apply": "小明", "detail_apply": "添加随住人员", "status": "待处理", "user_identify": "张晓明", "date_identify": "2019-10-10" },
+  { id: "1", "order_id": "123", "date_apply": "2018-10-09", "user_apply": "小明", "detail_apply": "添加随住人员", "status": "待处理", "user_identify": "张晓明", "date_identify": "2019-10-10" },
+  { id: "1", "order_id": "123", "date_apply": "2018-10-09", "user_apply": "小明", "detail_apply": "添加随住人员", "status": "待处理", "user_identify": "张晓明", "date_identify": "2019-10-10" },
+  { id: "1", "order_id": "123", "date_apply": "2018-10-09", "user_apply": "小明", "detail_apply": "添加随住人员", "status": "待处理", "user_identify": "张晓明", "date_identify": "2019-10-10" },
+  { id: "1", "order_id": "123", "date_apply": "2018-10-09", "user_apply": "小明", "detail_apply": "添加随住人员", "status": "待处理", "user_identify": "张晓明", "date_identify": "2019-10-10" },
+  { id: "1", "order_id": "123", "date_apply": "2018-10-09", "user_apply": "小明", "detail_apply": "添加随住人员", "status": "待处理", "user_identify": "张晓明", "date_identify": "2019-10-10" },
+  { id: "1", "order_id": "123", "date_apply": "2018-10-09", "user_apply": "小明", "detail_apply": "添加随住人员", "status": "待处理", "user_identify": "张晓明", "date_identify": "2019-10-10" },
 ]
 
 export default {
@@ -37,14 +41,13 @@ export default {
       tableData: [],
       columns: [
         { width: 60, titleAlign: 'center', columnAlign: 'center', type: 'selection' },
-        { field: 'project', title: '项目', width: 150, titleAlign: 'center', columnAlign: 'center', isResize: true },
-        { field: 'floor', title: '楼栋', width: 100, titleAlign: 'center', columnAlign: 'center', isResize: true },
-        { field: 'floor_num', title: '房号', width: 100, titleAlign: 'center', columnAlign: 'center', isResize: true },
-        { field: 'floor_area', title: '面积', width: 110, titleAlign: 'center', columnAlign: 'center', isResize: true },
-        { field: 'floor_type', title: '户型', width: 110, titleAlign: 'center', columnAlign: 'center' },
-        { field: 'floor_rent', title: '房租', width: 110, titleAlign: 'center', columnAlign: 'center' },
-        { field: 'floor_users', title: '入住人数', width: 110, titleAlign: 'center', columnAlign: 'center' },
-        { field: 'floor_date', title: '租期', width: 110, titleAlign: 'center', columnAlign: 'center', orderBy: '' }
+        { field: 'order_id', title: '单号', width: 150, titleAlign: 'center', columnAlign: 'center', isResize: true },
+        { field: 'date_apply', title: '申请时间', width: 110, titleAlign: 'center', columnAlign: 'center', isResize: true, orderBy: '' },
+        { field: 'user_apply', title: '申请人', width: 110, titleAlign: 'center', columnAlign: 'center', isResize: true },
+        { field: 'detail_apply', title: '申请事项', width: 110, titleAlign: 'center', columnAlign: 'center', isResize: true },
+        { field: 'status', title: '审核状态', width: 110, titleAlign: 'center', columnAlign: 'center', isResize: true },
+        { field: 'user_identify', title: '审批人', width: 110, titleAlign: 'center', columnAlign: 'center', isResize: true },
+        { field: 'date_identify', title: '审批时间', width: 110, titleAlign: 'center', columnAlign: 'center', isResize: true, orderBy: '' }
       ]
     }
   },
@@ -54,7 +57,7 @@ export default {
   methods: {
     goEdit(id) { // 前往编辑
       this.$router.push({
-        name: 'house_resource.house.edit',
+        name: 'business.members.identify.info',
         params: { id }
       })
     },

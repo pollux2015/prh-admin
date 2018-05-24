@@ -1,112 +1,140 @@
 <template>
-  <div>
-    <v-table :columns="columns" :table-data="tableData" :row-dblclick="tableDbclick" :row-click="tableClick" :select-all="selectALL" :select-group-change="selectGroupChange" @sort-change="sortChange" :is-loading="tableLoading" :vertical-resize-offset="65" :show-vertical-border="true" :multiple-sort="false" column-width-drag is-vertical-resize is-horizontal-resize row-hover-color="#eee" row-click-color="#edf7ff" style="width:100%">
-    </v-table>
-    <div class="pager-wrapper">
-      <span class="pager-total">共{{pageTotal}}条</span>
-      <v-pagination class="page-component" @page-change="pageChange" @page-size-change="pageSizeChange" :total="pageTotal" :page-size="$store.getters.pagesize" :layout="['prev', 'pager', 'next', 'sizer', 'jumper']"></v-pagination>
+  <form class="form-wrapper">
+    <div class="form-top-funs">
+      <Tooltip label="保存" @click="formSave" icon="check_circle" :size="32"></Tooltip>
+      <Tooltip label="删除" @click="formDelete" icon="cancel" :size="32" color="red"></Tooltip>
     </div>
-  </div>
+    <mu-row>
+      <mu-col width="100" tablet="100" desktop="30">
+        <pic-view :list='viewList' />
+      </mu-col>
+      <mu-col width="100" tablet="100" desktop="70">
+        <div class="form-right">
+          <h2 class="form-header">陌生人提醒</h2>
+          <div class="card-info">
+            <div class="card-info-cont">
+              <div class="card-info-label">
+                <span>单&emsp;&emsp;号:</span> 2018-0313-0923032km
+              </div>
+              <div class="card-info-label">
+                <span>提醒时间:</span> 2018-01-08 12:00:00
+              </div>
+              <div class="card-info-label">
+                <span>时间范围:</span> 2018-01-08 至 2018-03-08
+              </div>
+              <div class="card-info-label">
+                <span>人脸识别次数:</span> <strong class="color-red">10次</strong>
+              </div>
+              <div class="card-info-label">
+                <span>处理状态:</span> <strong class="tag tag-error">待处理</strong>
+              </div>
+            </div>
+            <mu-text-field label="处理意见" hintText="项目介绍在100个字符内" multiLine :rows="3" :rowsMax="6" :maxLength="100" fullWidth labelFloat/>
+            <div class="form-footer">
+              <mu-raised-button label="解决" @click="formSave" icon="check_circle" backgroundColor="blue" />
+              <mu-raised-button label="下次解决" @click="formDelete" icon="cancel" backgroundColor="red" />
+            </div>
+          </div>
+        </div>
+      </mu-col>
+    </mu-row>
+  </form>
 </template>
 <script>
-const resData = [
-  { id: "1", "project": "A花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
-  { id: "2", "project": "B花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
-  { id: "3", "project": "C花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
-  { id: "4", "project": "D花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
-  { id: "5", "project": "E花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
-  { id: "6", "project": "F花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
-  { id: "7", "project": "F花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
-  { id: "8", "project": "F花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
-  { id: "9", "project": "F花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
-  { id: "10", "project": "F花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
-  { id: "11", "project": "F花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
-  { id: "12", "project": "F花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
-  { id: "13", "project": "F花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
-  { id: "14", "project": "F花园", "floor": "A栋", "floor_num": "B311", "floor_area": "300㎡", "floor_type": "两室一厅", "floor_rent": "1500/月", "floor_users": "3", "floor_date": "2019-09-08" },
-]
-
 export default {
   data() {
     return {
-      tableLoading: false,
-      pageCurrent: 1,
-      pageTotal: 130,
-      tableSelection: [],
-      tableSelectionIds: [],
-      tableData: [],
-      columns: [
-        { width: 60, titleAlign: 'center', columnAlign: 'center', type: 'selection' },
-        { field: 'project', title: '项目', width: 150, titleAlign: 'center', columnAlign: 'center', isResize: true },
-        { field: 'floor', title: '楼栋', width: 100, titleAlign: 'center', columnAlign: 'center', isResize: true },
-        { field: 'floor_num', title: '房号', width: 100, titleAlign: 'center', columnAlign: 'center', isResize: true },
-        { field: 'floor_area', title: '面积', width: 110, titleAlign: 'center', columnAlign: 'center', isResize: true },
-        { field: 'floor_type', title: '户型', width: 110, titleAlign: 'center', columnAlign: 'center' },
-        { field: 'floor_rent', title: '房租', width: 110, titleAlign: 'center', columnAlign: 'center' },
-        { field: 'floor_users', title: '入住人数', width: 110, titleAlign: 'center', columnAlign: 'center' },
-        { field: 'floor_date', title: '租期', width: 110, titleAlign: 'center', columnAlign: 'center', orderBy: '' }
-      ]
+      viewList: ['https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=4005596794,992112216&fm=27&gp=0.jpg', 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1781615267,834481015&fm=27&gp=0.jpg', 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=489423423,2450269323&fm=27&gp=0.jpg'],
+      formParams: {}
     }
   },
-  created() {
-    this.getTableData(1)
+  computed: {
+    isEdit() {
+      return this.$route.name.search('edit') != -1
+    }
+  },
+  beforeRouteEnter(to, from, next) {
+    next((app) => {
+      app.initPage()
+    })
+  },
+  watch: {
+    '$route' () {
+      this.initPage()
+    },
   },
   methods: {
-    goEdit(id) { // 前往编辑
-      this.$router.push({
-        name: 'house_resource.house.edit',
-        params: { id }
-      })
+    initPage() {
+      if (this.isEdit) {
+        this.$store.commit('CLEAR_TAB')
+        this.$store.commit('ADD_TAB', {
+          name: 'house_resource.list',
+          meta: { title: '房源列表', tabFixed: true },
+          params: {
+            id: this.$route.params.id,
+            type: 'floor'
+          }
+        })
+      }
     },
-    getTableData(currentPage) { // 获取表格数据
-      this.pageCurrent = currentPage || 1
-      this.pageSize = this.$store.pagesize
-      this.tableLoading = true
-
-      setTimeout(() => {
-        // response
-        // this.$lodash.forEach(resData, (item) => {item._checked = false})
-        this.tableData = resData
-        this.pageTotal = 130
-        this.tableLoading = false
-      }, 1000)
-
+    formSave() {
+      this.$toastr.success('标记为已解决')
+      // this.$store.commit('REMOVE_TAB_CURRENT')
     },
-    pageChange(currentPage) { // 切换分页
-      this.getTableData(currentPage)
-    },
-    pageSizeChange(size) { // 设置表格每页显示条数
-      this.$store.commit('SET_PAGE_SIZE', size)
-      this.getTableData(1)
-    },
-    sortChange(params) { // 表格排序
-      this.sort = params
-      this.getTableData(1)
-    },
-    getSelectionBy(name) { // 获取表格选中行, 指定字段名集合
-      return this.$lodash.map(this.tableSelection, 'id')
-    },
-    selectALL(selection) { // 表格全选
-      this.tableSelection = selection
-      this.tableSelectionIds = this.getSelectionBy('id')
-    },
-    selectGroupChange(selection) { // 表格选中change
-      this.tableSelection = selection
-      this.tableSelectionIds = this.getSelectionBy('id')
-    },
-    tableDbclick(rowIndex, rowData, column) { // 双击表格行
-      this.goEdit(rowData.id)
-    },
-    tableClick(rowIndex, rowData, column) { // 单击表格行
-      let currentRow = this.tableData[rowIndex];
-      currentRow._checked = !currentRow._checked;
-      this.$set(this.tableData, rowIndex, currentRow)
-    },
+    formDelete() {
+      this.$toastr.success('标记为下次解决')
+      // this.$salert({
+      //   title: '不通过',
+      //   content: '确定审核不通过?',
+      //   btnTxt: '确定',
+      //   handler: () => {
+      //     this.$modal.hide('alert')
+      //     this.$toastr.success('审核不通过')
+      //     this.$store.commit('REMOVE_TAB_CURRENT')
+      //   }
+      // })
+    }
   }
 }
 
 </script>
+<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.form-wrapper{
+  padding-top: 5px;
+}
+.form-top-funs {
+  top: 0;
+}
 
+.card-info {
+  position: relative;
+  font-size: 16px;
+}
+
+.card-info-img {
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 140px;
+  min-height: 140px;
+  background-color: #eeeeee;
+}
+
+.card-info-img img {
+  width: 100%;
+}
+
+.card-info-label {
+  padding: 12px 0;
+  border-bottom: 1px solid #ddd
+}
+
+.card-info-label span {
+  display: inline-block;
+  /*width: 110px;*/
+  font-weight: 700;
+  padding-right: 5px;
+}
 
 </style>
