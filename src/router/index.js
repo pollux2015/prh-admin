@@ -8,6 +8,10 @@ import tenementIndex from '@/components/view/tenement/index.vue' // 租户首页
 Vue.use(Router)
 
 const basic = [
+  {
+    path: '/',
+    redirect: {name: 'home'}
+  },
   { path: '/login', name: 'login', meta: { title: '登录' }, component: resolve => require(['@/components/view/login.vue'], resolve) },
 ]
 
